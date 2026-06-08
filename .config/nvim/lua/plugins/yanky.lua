@@ -10,8 +10,5 @@ return {
       },
     })
     vim.keymap.set({ "n", "x" }, "y", "<Plug>(YankyYank)")
-
-    -- YankyPut
-    -- YankyYanked
   end,
 }
