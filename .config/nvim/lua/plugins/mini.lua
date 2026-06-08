@@ -3,20 +3,7 @@ return {
   "nvim-mini/mini.nvim",
   version = false,
   config = function()
-    -- require("mini.notify").setup()
     -- require("mini.ai").setup()
-
-    -- require('mini.indentscope').setup({
-    --   symbol = '╎',
-    --   draw = {
-    --     -- Delay (in ms) between event and start of drawing scope indicator
-    --     delay = 100,
-    --     animation = require('mini.indentscope').gen_animation.none(),
-    --
-    --     -- Symbol priority. Increase to display on top of more symbols.
-    --     priority = 2,
-    --   },
-    -- })
 
     require("mini.bracketed").setup()
     require("mini.bufremove").setup()
@@ -175,17 +162,16 @@ return {
 
     require("mini.pairs").setup()
 
-    -- Git
+    --- Git
     require("mini.git").setup()
     require("mini.diff").setup({
       view = {
-        -- TODO: Look into changing colors
         style = "sign",
         signs = { add = "+", change = "~", delete = "_" },
       },
     })
 
-    -- Notifications
+    --- Notifications
     require("mini.notify").setup()
     vim.keymap.set("n", "<leader>n", function()
       -- Toggle: if the history window is already open, close it
@@ -202,13 +188,6 @@ return {
 
     -- Cmdline
     -- require("mini.cmdline").setup()
-
-    -- vim.keymap.set(
-    --   "n",
-    --   "<leader>n",
-    --   require("mini.notify").show_history,
-    --   { desc = "Show notification history" }
-    -- )
 
     --- mini.hipatterns ---
 
@@ -246,15 +225,12 @@ return {
     -- })
     -- vim.api.nvim_set_hl(0, 'MiniHipatternsTripleDash', { fg = '#6495ED' })
 
-    --- mini.statusline ---
-    require("mini.statusline").setup()
-
     -- require("mini.jump").setup()
 
     -- MiniBracketed.buffer("forward", { wrap = false })
     -- MiniBracketed.
 
-    -- TODO: Add a keybind to toggle this.
+    -- TODO: Add a keybind to toggle this?
     require("mini.indentscope").setup({
       draw = {
         animation = require("mini.indentscope").gen_animation.none(),
@@ -273,35 +249,54 @@ return {
     })
     vim.api.nvim_set_hl(0, "MiniIndentscopeSymbol", { link = "Comment" })
 
-    -- local MiniStatusline = require("mini.statusline");
-
-    -- MiniStatusline.setup({
+    --- mini.statusline ---
+    -- local MiniStatusline = require("mini.statusline")
+    -- require("mini.statusline").setup({
     --   content = {
     --     active = function()
-    --       local mode, mode_hl = MiniStatusline.section_mode({ trunc_width = 120 })
-    --       local git           = MiniStatusline.section_git({ trunc_width = 75 })
-    --       local diff          = MiniStatusline.section_diff({ trunc_width = 75 })
-    --       local diagnostics   = MiniStatusline.section_diagnostics({ trunc_width = 75 })
-    --       local lsp           = MiniStatusline.section_lsp({ trunc_width = 75 })
-    --       local filename      = MiniStatusline.section_filename({ trunc_width = 140 })
-    --       local fileinfo      = MiniStatusline.section_fileinfo({ trunc_width = 120 })
-    --       local location      = MiniStatusline.section_location({ trunc_width = 75 })
-    --       local search        = MiniStatusline.section_searchcount({ trunc_width = 75 })
+    --       local git = MiniStatusline.section_git()
+    --       local diff = MiniStatusline.section_diff()
+    --       local diagnostics = MiniStatusline.section_diagnostics()
+    --       local lsp = MiniStatusline.section_lsp()
     --
     --       return MiniStatusline.combine_groups({
-    --         { hl = mode_hl,                  strings = { mode } },
-    --         { hl = "MiniStatuslineDevinfo",  strings = { git, diff, diagnostics, lsp } },
-    --         "%<", -- truncate point
-    --         { hl = "MiniStatuslineFilename", strings = { filename } },
-    --         "%=", -- right-align
-    --         { hl = "MiniStatuslineFileinfo", strings = { fileinfo } },
-    --         { hl = mode_hl,                  strings = { search, location } },
+    --         { content = git, hl = "MiniStatuslineDevinfo" },
+    --         { content = diff, hl = "MiniStatuslineDevinfo" },
+    --         { content = diagnostics, hl = "MiniStatuslineDevinfo" },
+    --         { content = lsp, hl = "MiniStatuslineDevinfo", right = true },
     --       })
     --     end,
     --   },
-    --   use_icons = true,
     -- })
-    --
+
+    --- statusline
+    local statusline = require("mini.statusline")
+    statusline.setup({
+      content = {
+        active = function()
+          local mode, mode_hl = statusline.section_mode({ trunc_width = 120 })
+          local git = statusline.section_git({ trunc_width = 40 })
+          local diff = statusline.section_diff({ trunc_width = 75 })
+          local diagnostics = statusline.section_diagnostics({ trunc_width = 75 })
+          local lsp = statusline.section_lsp({ trunc_width = 75 })
+          local filename = statusline.section_filename({ trunc_width = 140 })
+          local fileinfo = statusline.section_fileinfo({ trunc_width = 120 })
+          local location = statusline.section_location({ trunc_width = 75 })
+          local search = statusline.section_searchcount({ trunc_width = 75 })
+
+          return statusline.combine_groups({
+            { hl = mode_hl, strings = { mode } },
+            { hl = "MiniStatuslineDevinfo", strings = { lsp } },
+            "%<", -- Mark general truncate point
+            { hl = "MiniStatuslineFilename", strings = { filename, git, diff } },
+            "%=", -- End left alignment
+            { hl = "MiniStatuslineFileinfo", strings = { diagnostics } },
+            { hl = mode_hl, strings = { search } },
+          })
+        end,
+      },
+    })
+
     -- -- Evil-lualine-ish palette (gruvbox-y; tweak to taste)
     -- local c = {
     --   bg       = "#202328",

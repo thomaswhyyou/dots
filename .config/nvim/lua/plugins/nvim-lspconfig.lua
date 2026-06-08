@@ -22,6 +22,13 @@ return {
       "tsgo",
     })
 
+    -- vim.diagnostic.config({
+    --   virtual_lines = false, -- Show only for current line
+    --   virtual_text = { current_line = true }, -- Disable classic inline text
+    --   signs = true,
+    --   underline = true,
+    -- })
+
     -- TODO: Check if we wnat to configure any of this..
     -- https://neovim.io/doc/user/diagnostic/
 
