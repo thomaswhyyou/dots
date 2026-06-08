@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/tsyy/proj/full-stack-on-cloudflare-starter-repo/packages/data-ops/src/drizzle-out/**)",
+      "Read(//Users/tsyy/proj/full-stack-on-cloudflare-starter-repo/packages/data-ops/src/**)"
+    ]
+  }
+}

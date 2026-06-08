@@ -1,0 +1,102 @@
+# Reference:
+# http://durdn.com/blog/2012/11/22/must-have-git-aliases-advanced-examples/
+
+[core]
+  editor = nvim
+
+[user]
+  name = Thomas Yu
+  email = hey@thomassyy.com
+
+[push]
+  default = current
+
+[pull]
+  default = current
+
+[branch]
+  autosetuprebase = always
+
+[apply]
+  whitespace = nowarn
+
+; [color "diff"]
+;   meta = yellow
+;   frag = 163        # Purple
+;   old = 160         # Red
+;   new = 34          # Green
+;   plain = white
+;
+; [color "status"]
+;   added = 34        # Green
+;   changed = yellow
+;   untracked = 31    # Dark blue
+
+[alias]
+  # Basic
+  cp = cherry-pick
+  st = status -s
+  co = checkout
+  br = branch
+
+  # Commit
+  cm = commit
+  amend = commit --amend
+
+  # Diff
+  df = diff
+  ds = diff --staged
+  dc = diff --cached
+
+  # Reset
+  r = reset
+  r1 = reset HEAD^
+  r2 = reset HEAD^^
+  rh = reset --hard
+  rh1 = reset HEAD^ --hard
+  rh2 = reset HEAD^^ --hard
+
+  # log commands
+  ls = log --pretty=format:"%C(green)%h\\ %C(yellow)[%ad]%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
+  ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [a:%an,c:%cn]" --decorate --numstat
+  lc  = "!f() { git ll "$1"^.."$1"; }; f"
+  lnc = log --pretty=format:"%h\\ %s\\ [%cn]"
+  flog = log -u
+
+  unstage = reset -q HEAD --
+  discard = checkout --
+  nevermind = !git reset --hard HEAD && git clean -d -f
+  uncommit = reset --mixed HEAD~
+  save = commit -m
+  resave = commit --amend
+  invert = revert
+  last = log -1 HEAD --format=format:"%Cred%H"
+  summary = status -u -s
+  graph = log --graph -10 --branches --remotes --tags  --format=format:'%Cgreen%h %Creset• %<(75,trunc)%s (%cN, %ar) %Cred%d' --date-order
+  history = log -10 --format=format:'%Cgreen%h %Creset• %s (%cN, %ar)'
+  branchout = checkout -b
+  tags = tag
+  branches = branch -a
+  stashes = stash list
+  remotes = remote -v
+  prestage = diff -w --word-diff=color
+  precommit = diff --cached -w --word-diff=color --word-diff-regex='[^[:space:]<>]+'
+  move = mv
+  remove = rm
+  unmerged = branch --no-merged
+  unstash = stash pop
+  what = show -w
+  untrack = rm -r --cached
+  rewrite = rebase -i
+  amend = commit --amend
+  back = checkout "-"
+  contributors = shortlog -s -n
+  filetrail = git log --follow -p -w
+  mergetrail = log --ancestry-path --merges
+  unmerged = diff --name-only --diff-filter=U
+
+; [filter "lfs"]
+;   clean = git-lfs clean -- %f
+;   smudge = git-lfs smudge -- %f
+;   process = git-lfs filter-process
+;   required = true

@@ -1,0 +1,25 @@
+# [settings]
+# lockfile = true
+
+[plugins]
+  dexter = "https://github.com/remoteoss/dexter.git"
+
+[tools]
+claude-code = "latest"
+tree-sitter = "latest"
+# rust
+rust-analyzer = "latest" # keep ahead of rust in PATH
+rust = "stable"
+# lua
+lua-language-server = "latest"
+stylua = "latest"
+# erlang / elixir
+erlang = "latest"
+elixir = "latest"
+"aqua:elixir-lang/expert" = "latest"
+dexter = "latest"
+# js / node
+node = "latest"
+pnpm = "latest"
+"npm:@typescript/native-preview" = "latest"
+"npm:@mariozechner/pi-coding-agent" = "latest"
