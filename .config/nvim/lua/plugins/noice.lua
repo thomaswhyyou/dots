@@ -1,6 +1,7 @@
 -- https://github.com/folke/noice.nvim
 return {
   "folke/noice.nvim",
+  enabled = false,
   dependencies = { "MunifTanjim/nui.nvim" },
   event = "VeryLazy",
   opts = {
@@ -14,7 +15,6 @@ return {
         size = { width = 80, height = "auto" },
       },
     },
-
     messages = { enabled = false },
     popupmenu = { enabled = false },
     notify = { enabled = false },
@@ -24,6 +24,5 @@ return {
       signature = { enabled = false },
       message = { enabled = false },
     },
-
   },
 }
