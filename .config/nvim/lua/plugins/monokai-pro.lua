@@ -51,20 +51,24 @@ return {
       -- local ch = require("monokai-v2.color_helper")
 
       return {
-        -- Set vim.o.colorcolumn slightly darker than the bg color.
+        -- Make ColorColumn slightly darker than the background
         ColorColumn = {
           bg = mc.modify_channel(c.editor.background, "lightness", function(l)
             return l - 1
           end),
         },
-
+        -- Color Oil directories cyan
         Directory = { fg = c.base.cyan, bg = c.editor.background, bold = true },
+        -- Keep CurSearch identical to IncSearch
         CurSearch = { link = "IncSearch" },
+        -- Make the cursor line number brighter
+        CursorLineNr = { link = "Todo" },
+        -- Make Search highlights brighter
+        Search = { bg = c.base.dimmed3, fg = c.base.white },
 
         -- Search = { bg = ch.blend(c.base.yellow, 0.35, c.editor.background) },
         -- Search = { bg = c.base.dimmed3 },
         -- Search = { bg = c.base.dimmed1, fg = c.base.black },
-        -- Search = { bg = c.base.dimmed3, fg = c.base.white },
       }
     end,
   },
