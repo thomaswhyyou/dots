@@ -1,7 +1,6 @@
 --- GLOBALS ---
 
--- Set <space> as the leader key, must happen before plugins are loaded
-vim.g.mapleader = vim.keycode("<Space>")
+vim.g.mapleader = " "             -- Must define first before plugins are loaded
 
 --- OPTIONS ---
 
@@ -18,8 +17,8 @@ vim.opt.cursorlineopt = "number"  -- Highlight only the line number, not the ent
 vim.opt.cmdheight = 0             -- Hide command line when idle to remove the bottom gap (default: 1)
 -- XXX
 -- vim.opt.pumheight = 10
-vim.opt.pumborder = "rounded"      -- The border style of popupmenu windows (default: "")
-vim.opt.winborder = "rounded"
+vim.opt.pumborder = "rounded"     -- The border style of popupmenu windows (default: "")
+vim.opt.winborder = "rounded"     -- The border style of floating windows (default: "")
 -- Indentation
 vim.opt.expandtab = true          -- Use spaces instead of tabs (default: false)
 vim.opt.shiftwidth = 2            -- Spaces per indent level (default: 8)
@@ -39,16 +38,16 @@ vim.opt.listchars = {
 vim.opt.linebreak = true          -- Wrap lines at word boundaries, not mid-word (default: false)
 vim.opt.wrap = false              -- Don't wrap long lines visually (default: true)
 -- Splits
-vim.opt.splitbelow = true -- Horizontal splits open below (default: false)
-vim.opt.splitright = true -- Vertical splits open to the right (default: false)
+vim.opt.splitbelow = true         -- Horizontal splits open below (default: false)
+vim.opt.splitright = true         -- Vertical splits open to the right (default: false)
 -- Undo / Swap
-vim.opt.undofile = true -- Persist undo history across sessions (default: false)
-vim.opt.swapfile = false -- Disable swap files; undo + git is enough (default: true)
+vim.opt.undofile = true           -- Persist undo history across sessions (default: false)
+vim.opt.swapfile = false          -- Disable swap files; undo + git is enough (default: true)
 -- Misc
-vim.opt.clipboard = "unnamedplus"   -- Use system clipboard for yank/paste (default: "")
-vim.opt.updatetime = 250 -- Faster CursorHold events, useful for LSP/git gutters (default: 4000)
-vim.opt.timeoutlen = 300 -- Faster key sequence completion (default: 1000)
-vim.opt.confirm = true -- Prompt to save instead of erroring on :q (default: false)
+vim.opt.clipboard = "unnamedplus" -- Use system clipboard for yank/paste (default: "")
+vim.opt.updatetime = 250          -- Faster CursorHold events, useful for LSP/git gutters (default: 4000)
+vim.opt.timeoutlen = 300          -- Faster key sequence completion (default: 1000)
+vim.opt.confirm = true            -- Prompt to save instead of erroring on :q (default: false)
 
 --- KEYMAPS ---
 
@@ -75,10 +74,6 @@ vim.keymap.set("n", "<Leader><Space>", function()
   -- Enable highlight search
   vim.opt.hlsearch = true
 end, { desc = "Highlight all (*)", noremap = true, silent = true })
--- Don't let the replaced text yanked into the clipboard/unnamed register when
--- pasting over selected text.
-vim.keymap.set("v", "p", '"_dP', { noremap = true, silent = true })
-vim.keymap.set("v", "p", '"_dP', { noremap = true, silent = true })
 -- Highlight last inserted text.
 vim.keymap.set("n", "gV", "`[v`]")
 -- Better indenting, keep the selection in place and allows repeated indenting.
@@ -87,10 +82,12 @@ vim.keymap.set("v", ">", ">gv")
 -- Scroll the current line up/down faster.
 vim.keymap.set("n", "<C-e>", "8<C-e>")
 vim.keymap.set("n", "<C-y>", "8<C-y>")
--- Automatically jump to end of text you pasted:
--- (so that you can paste multiple lines multiple times with simple ppppp)
-vim.keymap.set("v", "p", "p`]", { silent = true })
-vim.keymap.set("n", "p", "p`]", { silent = true })
+-- Paste and jump to the end of the pasted text, so you can paste multiple lines
+-- multiple times with a simple ppppp.
+vim.keymap.set("n", "p", "p`]", { noremap = true, silent = true })
+-- In visual mode, replace the selection without clobbering the unnamed register
+-- (delete into the black hole), then jump to the end of the pasted text.
+vim.keymap.set("x", "p", '"_dP`]', { noremap = true, silent = true })
 
 --- AUTOCMDS ---
 
@@ -232,6 +229,7 @@ require("lazy").setup({
 })
 
 --- References ---
+-- https://neovim.io/doc/user/options/
 -- https://github.com/nvim-lua/kickstart.nvim/blob/master/init.lua
 
 --- TODO

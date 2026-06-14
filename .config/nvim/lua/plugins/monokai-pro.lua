@@ -70,6 +70,6 @@ return {
     end,
   },
   init = function()
-    vim.cmd([[colorscheme monokai-v2]])
+    vim.cmd.colorscheme("monokai-v2")
   end,
 }

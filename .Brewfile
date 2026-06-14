@@ -1,3 +1,6 @@
+# TODO: Look into moving to mise bootstrap.
+# https://mise.jdx.dev/bootstrap.html
+
 # Terminal essentials
 brew "git"
 brew "curl"
@@ -32,3 +35,5 @@ cask "appcleaner"
 cask "raycast"
 cask "rectangle"
 cask "onlyoffice"
+cask "notion"
+cask "itsycal"
