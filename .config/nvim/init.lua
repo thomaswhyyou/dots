@@ -164,16 +164,16 @@ vim.api.nvim_create_autocmd("FileType", {
     end)
   end,
 })
-
--- -- make it easier to close man-files when opened inline
--- vim.api.nvim_create_autocmd("FileType", {
---   group = augroup("man_unlisted"),
---   pattern = { "man" },
---   callback = function(event)
---     vim.bo[event.buf].buflisted = false
---   end,
--- })
-
+-- Unlist man-page buffers so they don't show up in the buffer list and get
+-- skipped by :bnext/:bprev. Keeps buffer navigation flowing only through real
+-- files and makes the man buffer easy to close (:q) and forget.
+vim.api.nvim_create_autocmd("FileType", {
+  group = augroup("man_unlisted"),
+  pattern = { "man" },
+  callback = function(event)
+    vim.bo[event.buf].buflisted = false
+  end,
+})
 -- Wrap and check for spell in text filetypes
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup("wrap_spell"),
