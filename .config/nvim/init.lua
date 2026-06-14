@@ -16,7 +16,7 @@ vim.opt.cursorline = true         -- Highlight the current cursor line with Curs
 vim.opt.cursorlineopt = "number"  -- Highlight only the line number, not the entire line (default: "both")
 vim.opt.cmdheight = 0             -- Hide command line when idle to remove the bottom gap (default: 1)
 -- XXX
--- vim.opt.pumheight = 10
+vim.opt.pumheight = 16
 vim.opt.pumborder = "rounded"     -- The border style of popupmenu windows (default: "")
 vim.opt.winborder = "rounded"     -- The border style of floating windows (default: "")
 -- Indentation
