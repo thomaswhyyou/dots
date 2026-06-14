@@ -187,7 +187,7 @@ return {
     end, { desc = "Notification history" })
 
     -- Cmdline
-    -- require("mini.cmdline").setup()
+    require("mini.cmdline").setup()
 
     --- mini.hipatterns ---
 

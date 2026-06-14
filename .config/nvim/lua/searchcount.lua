@@ -2,10 +2,9 @@
 --
 -- Noice routes Neovim's `search_count` message to a "virtualtext" view that
 -- draws an extmark at end-of-line using `DiagnosticVirtualTextInfo` (blue-ish).
--- We don't reimplement the count: `mini.statusline.section_searchcount()` (mini
--- is already installed) wraps `vim.fn.searchcount()` and handles the `v:hlsearch`
--- gate, invalid-pattern errors (E54), and `?/?` / `>maxcount` formatting. This
--- module only owns *placement* (the extmark) and *triggers* (the autocmds).
+-- This module is standalone: it wraps `vim.fn.searchcount()` directly (see
+-- `searchcount_str`) and owns *placement* (the extmark) and *triggers* (the
+-- autocmds).
 
 local M = {}
 
@@ -13,14 +12,46 @@ local ns = vim.api.nvim_create_namespace("user_search_count")
 
 local displayed = false -- whether a badge is currently drawn (for the on_key guard)
 
+-- Format `vim.fn.searchcount()` as `current/total`, gated on `v:hlsearch`.
+-- Mirrors `mini.statusline.section_searchcount`: searchcount() is wrapped in
+-- pcall because while typing a pattern it can raise (e.g. `/\(` gives E54), and
+-- `>maxcount` / `?/?` (incomplete) are formatted the way noice's badge shows.
+local function searchcount_str(options)
+  if vim.v.hlsearch == 0 then return "" end
+
+  local ok, s = pcall(vim.fn.searchcount, options)
+  if not ok or s.current == nil or s.total == 0 then return "" end
+
+  if s.incomplete == 1 then return "?/?" end
+
+  local too_many = (">%d"):format(s.maxcount)
+  local current = s.current > s.maxcount and too_many or s.current
+  local total = s.total > s.maxcount and too_many or s.total
+  return ("%s/%s"):format(current, total)
+end
+
 function M.clear()
   displayed = false
   vim.api.nvim_buf_clear_namespace(0, ns, 0, -1)
 end
 
+-- True if the cursor sits at the start of a match for `pattern`. `searchpos`
+-- with `cnW` returns the match at-or-after the cursor without moving (`c`
+-- accepts a match beginning at the cursor, `n` no-move, `W` no-wrap); when that
+-- start equals the cursor we're on a hit. Search jumps / n / N / * / # all land
+-- on a match's start, so the badge shows there but is dropped once h/j/k/l move
+-- off it. pcall guards bad patterns (e.g. E54), as in `searchcount_str`.
+local function cursor_on_match(pattern)
+  if pattern == "" then return false end
+  local cursor = vim.api.nvim_win_get_cursor(0) -- { row (1-based), col (0-based) }
+  local ok, pos = pcall(vim.fn.searchpos, pattern, "cnW") -- { row (1-based), col (1-based) }
+  if not ok then return false end
+  return pos[1] == cursor[1] and pos[2] == cursor[2] + 1
+end
+
 -- Draw the `[current/total]` badge at the end of the cursor line.
--- `pattern` (live incsearch) is forwarded to searchcount; otherwise mini counts
--- against the last search register and returns "" unless `v:hlsearch` is on.
+-- `pattern` (live incsearch) is forwarded to searchcount; otherwise the count is
+-- against the last search register and is "" unless `v:hlsearch` is on.
 local function render(pattern)
   M.clear()
 
@@ -32,13 +63,13 @@ local function render(pattern)
     term = pattern
   else
     term = vim.fn.getreg("/")
+    -- Only show against the cursor line when the cursor is actually on a match;
+    -- otherwise moving with h/j/k/l would drag a stale badge along the buffer.
+    if not cursor_on_match(term) then return end
   end
 
-  -- No `trunc_width` so the badge never truncates by window width.
-  local ok, str = pcall(function()
-    return require("mini.statusline").section_searchcount({ options = options })
-  end)
-  if not ok or str == nil or str == "" then return end
+  local str = searchcount_str(options)
+  if str == "" then return end
 
   -- e.g. `foo [1/3]`, search term to the left of the count, like noice.
   local label = ("%s [%s]"):format(term, str)
