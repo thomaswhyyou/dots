@@ -14,9 +14,6 @@
 --       "which-key",
 --     },
 --     override = function(c)
---       -- print(vim.inspect(c))
---
---       -- TODO: Not sure if this needs to be included as deps?
 --       local mc = require("mini.colors")
 --
 --       return {
@@ -50,22 +47,24 @@ return {
       "which-key",
     },
     override = function(c)
-      -- print(vim.inspect(c))
-
-      -- TODO: Not sure if this needs to be included as deps?
       local mc = require("mini.colors")
+      -- local ch = require("monokai-v2.color_helper")
 
       return {
-        -- vim.o.colorcolumn, slightly darker than the bg color
+        -- Set vim.o.colorcolumn slightly darker than the bg color.
         ColorColumn = {
           bg = mc.modify_channel(c.editor.background, "lightness", function(l)
             return l - 1
           end),
         },
-        --
-        Directory = { fg = c.base.cyan, bg = c.editor.background, bold = true },
 
+        Directory = { fg = c.base.cyan, bg = c.editor.background, bold = true },
+        CurSearch = { link = "IncSearch" },
+
+        -- Search = { bg = ch.blend(c.base.yellow, 0.35, c.editor.background) },
         -- Search = { bg = c.base.dimmed3 },
+        -- Search = { bg = c.base.dimmed1, fg = c.base.black },
+        -- Search = { bg = c.base.dimmed3, fg = c.base.white },
       }
     end,
   },
