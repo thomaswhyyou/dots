@@ -21,9 +21,9 @@ vim.opt.pumborder = "rounded"     -- The border style of popupmenu windows (defa
 vim.opt.winborder = "rounded"     -- The border style of floating windows (default: "")
 -- Indentation
 vim.opt.expandtab = true          -- Use spaces instead of tabs (default: false)
-vim.opt.shiftwidth = 2            -- Spaces per indent level (default: 8)
-vim.opt.tabstop = 2               -- Spaces a <Tab> counts for (default: 8)
 vim.opt.smartindent = true        -- Auto-indent new lines based on syntax (default: false)
+vim.opt.tabstop = 2               -- Spaces a <Tab> counts for (default: 8)
+vim.opt.shiftwidth = 2            -- Spaces per indent level (default: 8)
 vim.opt.softtabstop = -1          -- Makes <Tab> behave like shiftwidth (default: 0)
 -- Search
 -- vim.opt.hlsearch = true           -- Highlight matches; the search-count badge keys off this (default: true)
@@ -233,7 +233,3 @@ require("lazy").setup({
 --- References ---
 -- https://neovim.io/doc/user/options/
 -- https://github.com/nvim-lua/kickstart.nvim/blob/master/init.lua
-
---- TODO
--- - Clean up fzf
--- - Change the current line number and current word color to orange?

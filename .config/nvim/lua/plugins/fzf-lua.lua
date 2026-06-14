@@ -1,4 +1,5 @@
 -- https://github.com/ibhagwan/fzf-lua
+-- TODO: Clean up the configs
 return {
   "ibhagwan/fzf-lua",
   dependencies = { "nvim-mini/mini.icons" },
