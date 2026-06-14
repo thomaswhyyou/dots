@@ -26,6 +26,7 @@ vim.opt.tabstop = 2               -- Spaces a <Tab> counts for (default: 8)
 vim.opt.smartindent = true        -- Auto-indent new lines based on syntax (default: false)
 vim.opt.softtabstop = -1          -- Makes <Tab> behave like shiftwidth (default: 0)
 -- Search
+-- vim.opt.hlsearch = true           -- Highlight matches; the search-count badge keys off this (default: true)
 vim.opt.ignorecase = true         -- Case-insensitive search (default: false)
 vim.opt.smartcase = true          -- Case-sensitive if query has uppercase (default: false)
 -- Text
@@ -51,11 +52,11 @@ vim.opt.confirm = true            -- Prompt to save instead of erroring on :q (d
 
 --- KEYMAPS ---
 
--- Clear search and other match highlights, and stop snippet on escape
+-- Clear search and other match highlights, and dismisses floating windows
+-- currently on screen.
 vim.keymap.set({ "i", "n", "s" }, "<esc>", function()
   vim.cmd("noh")
   vim.cmd("call clearmatches()")
-  -- XXX
   -- Deferred: closing windows is blocked under textlock in an expr mapping
   vim.schedule(function()
     for _, win in ipairs(vim.api.nvim_list_wins()) do
@@ -74,7 +75,7 @@ vim.keymap.set("n", "<Leader><Space>", function()
   -- Enable highlight search
   vim.opt.hlsearch = true
 end, { desc = "Highlight all (*)", noremap = true, silent = true })
--- Highlight last inserted text.
+-- Select last inserted text.
 vim.keymap.set("n", "gV", "`[v`]")
 -- Better indenting, keep the selection in place and allows repeated indenting.
 vim.keymap.set("v", "<", "<gv")
@@ -200,6 +201,7 @@ vim.api.nvim_create_autocmd("WinLeave", {
 })
 
 --- PACKAGES ---
+-- TODO: Migrate to the native package manager.
 
 -- https://lazy.folke.io/installation
 -- Bootstrap lazy.nvim
@@ -235,5 +237,3 @@ require("lazy").setup({
 --- TODO
 -- - Clean up fzf
 -- - Change the current line number and current word color to orange?
--- TODO
--- https://github.com/milanglacier/minuet-ai.nvim
