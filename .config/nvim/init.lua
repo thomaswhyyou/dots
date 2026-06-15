@@ -201,6 +201,9 @@ vim.api.nvim_create_autocmd("WinLeave", {
 
 --- PACKAGES ---
 -- TODO: Migrate to the native package manager.
+-- https://github.com/kite12580/pack.lua/tree/main
+-- https://github.com/zuqini/zpack.nvim
+-- https://fredrikaverpil.github.io/blog/2026/04/15/from-lazy.nvim-to-vim.pack/
 
 -- https://lazy.folke.io/installation
 -- Bootstrap lazy.nvim
