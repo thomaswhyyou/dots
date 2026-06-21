@@ -5,14 +5,14 @@ return {
   event = "VeryLazy",
   config = function()
     local theme = require("lualine.themes.auto")
-    -- Constant text/background color (don't follow the per-mode theme).
-    local normal_b = { fg = theme.normal.b.fg, bg = theme.normal.b.bg }
+    -- Constant plain text/background color (don't follow the per-mode theme).
+    local normal_b = { fg = theme.normal.c.fg, bg = theme.normal.b.bg }
 
     require("lualine").setup({
       options = {
         -- No separators between components within a section.
         component_separators = "",
-        -- Diagonal slant between sections: "\" on the left group, "/" on the right.
+        -- Diagonal slant between sections
         section_separators = {
           left = vim.fn.nr2char(0xE0B8), -- nf-ple-lower_left_triangle (\)
           right = vim.fn.nr2char(0xE0BA), -- nf-ple-lower_right_triangle (/)
@@ -21,7 +21,7 @@ return {
         globalstatus = true,
       },
       sections = {
-        -- Left-hand side
+        -- Left hand side
         lualine_a = {
           {
             "mode",
@@ -50,8 +50,7 @@ return {
           { "filename", path = 1, padding = { left = 0, right = 1 } },
           { "diff" },
         },
-
-        -- Right-hand side
+        -- Right hand side
         lualine_x = {
           {
             "diagnostics",
