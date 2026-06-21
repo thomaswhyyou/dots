@@ -1,35 +1,6 @@
--- -- TODO: Maybe remove blink and use the native autocomplete.
--- -- https://justinhj.github.io/2026/04/06/refreshing-your-neovim-config-for-0-12-0.html
--- -- https://blog.viktomas.com/graph/neovim-native-built-in-lsp-autocomplete/
--- -- https://www.reddit.com/r/neovim/comments/1t4sfiz/neovim_012_lsp_and_autocomplete_without_plugins/
---
--- -- Native completion
--- vim.opt.completeopt = "menu,menuone,noselect,popup" -- Ensures the menu appears even for a single match and uses the native popup window.
--- vim.o.autocomplete = true -- Enables the overall completion feature.
---
--- vim.api.nvim_create_autocmd("LspAttach", {
---   group = vim.api.nvim_create_augroup("lsp_completion", { clear = true }),
---   callback = function(args)
---     local client_id = args.data.client_id
---     if not client_id then
---       return
---     end
---
---     local client = vim.lsp.get_client_by_id(client_id)
---     if client and client:supports_method("textDocument/completion") then
---       -- Enable native LSP completion for this client + buffer
---       vim.lsp.completion.enable(true, client_id, args.buf, {
---         autotrigger = true,   -- auto-show menu as you type (recommended)
---         -- You can also set { autotrigger = false } and trigger manually with <C-x><C-o>
---       })
---     end
---   end,
--- })
-
 -- https://github.com/saghen/blink.cmp
 return {
   "saghen/blink.cmp",
-  -- enabled = false,
   dependencies = { "rafamadriz/friendly-snippets" },
   version = "1.*",
   opts = {
