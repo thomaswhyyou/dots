@@ -13,7 +13,6 @@
   "mini.nvim": { "branch": "main", "commit": "64e77a77173a23daa218ebfa2f7d59456b30326b" },
   "monokai-v2.nvim": { "branch": "main", "commit": "768e6ce3cc18aacb46cfbd9deb3877dd22c0c36e" },
   "multicursor.nvim": { "branch": "1.0", "commit": "704b99f10a72cc05d370cfeb294ff83412a8ab55" },
-  "noice.nvim": { "branch": "main", "commit": "7bfd942445fb63089b59f97ca487d605e715f155" },
   "nvim-lspconfig": { "branch": "master", "commit": "bfcc0171a43f22afa61d927ffe9fcb6cb85dc99e" },
   "nvim-scrollview": { "branch": "main", "commit": "0efc4e82094dbda2e411f7c8d44928716d00b655" },
   "nvim-tree.lua": { "branch": "master", "commit": "85d1145ac71c1b8e1423862c78165a1f609faf60" },
