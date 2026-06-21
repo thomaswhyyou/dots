@@ -15,6 +15,7 @@ vim.opt.showmode = false          -- Don't show mode in cmdline; statusline plug
 vim.opt.cursorline = true         -- Highlight the current cursor line with CursorLine (default: false)
 vim.opt.cursorlineopt = "number"  -- Highlight only the line number, not the entire line (default: "both")
 vim.opt.cmdheight = 0             -- Hide command line when idle to remove the bottom gap (default: 1)
+vim.opt.laststatus = 3            -- XXX
 vim.opt.pumheight = 16            -- XXX
 vim.opt.pumborder = "rounded"     -- The border style of popupmenu windows (default: "")
 vim.opt.winborder = "rounded"     -- The border style of floating windows (default: "")
@@ -57,13 +58,13 @@ vim.keymap.set({ "i", "n", "s" }, "<esc>", function()
   vim.cmd("noh")
   vim.cmd("call clearmatches()")
   -- Deferred: closing windows is blocked under textlock in an expr mapping
-  vim.schedule(function()
-    for _, win in ipairs(vim.api.nvim_list_wins()) do
-      if vim.api.nvim_win_get_config(win).relative ~= "" then
-        pcall(vim.api.nvim_win_close, win, false) -- false = don't force
-      end
-    end
-  end)
+  -- vim.schedule(function()
+  --   for _, win in ipairs(vim.api.nvim_list_wins()) do
+  --     if vim.api.nvim_win_get_config(win).relative ~= "" then
+  --       pcall(vim.api.nvim_win_close, win, false) -- false = don't force
+  --     end
+  --   end
+  -- end)
   return "<esc>"
 end, { expr = true, desc = "Escape and Clear hlsearch" })
 -- Highlight word under cursor without moving (converted to Lua by ChatGTP)
@@ -138,10 +139,8 @@ vim.api.nvim_create_autocmd("FileType", {
     "mininotify-history",
     -- "PlenaryTestPopup",
     -- "checkhealth",
-    -- "dap-float",
     -- "dbout",
     -- "gitsigns-blame",
-    -- "grug-far",
     -- "help",
     -- "lspinfo",
     -- "notify",
