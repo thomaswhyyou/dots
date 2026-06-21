@@ -234,6 +234,7 @@ require("lazy").setup({
 -- https://github.com/nvim-lua/kickstart.nvim/blob/master/init.lua
 
 --- Bookmarks ---
+-- https://github.com/rachartier/tiny-cmdline.nvim
 -- https://github.com/sheng-tse/jupynvim
 -- https://github.com/r4ppz/lspeek.nvim
 -- https://github.com/cursortab/cursortab.nvim
