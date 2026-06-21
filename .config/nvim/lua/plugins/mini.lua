@@ -6,11 +6,19 @@ return {
   config = function()
     -- require("mini.ai").setup()
 
+    -- https://nvim-mini.org/mini.nvim/readmes/mini-bufremove.html
     require("mini.bufremove").setup()
+
+    -- https://nvim-mini.org/mini.nvim/readmes/mini-bracketed.html
     require("mini.bracketed").setup()
+
+    -- https://nvim-mini.org/mini.nvim/readmes/mini-pairs.html
     require("mini.pairs").setup()
 
+    -- https://nvim-mini.org/mini.nvim/readmes/mini-git.html
     require("mini.git").setup()
+
+    -- https://nvim-mini.org/mini.nvim/readmes/mini-diff.html
     require("mini.diff").setup({
       view = {
         style = "sign",
@@ -18,6 +26,7 @@ return {
       },
     })
 
+    -- https://nvim-mini.org/mini.nvim/readmes/mini-notify.html
     require("mini.notify").setup({
       lsp_progress = {
         enable = false,
@@ -39,6 +48,7 @@ return {
       require("mini.notify").show_history() -- swaps the history buffer into that new split
     end, { desc = "Notification history" })
 
+    -- https://nvim-mini.org/mini.nvim/readmes/mini-indentscope.html
     require("mini.indentscope").setup({
       draw = {
         animation = require("mini.indentscope").gen_animation.none(),
@@ -52,7 +62,6 @@ return {
     vim.api.nvim_set_hl(0, "MiniIndentscopeSymbol", { link = "Comment" })
 
     --- mini.hipatterns ---
-
     -- require('mini.hipatterns').setup({
     --   highlighters = {
     --     -- Highlight markdown horizontal rules (3+ dashes)
@@ -86,73 +95,5 @@ return {
     --   },
     -- })
     -- vim.api.nvim_set_hl(0, 'MiniHipatternsTripleDash', { fg = '#6495ED' })
-
-    -- require("mini.jump").setup()
-
-    --- mini.statusline ---
-    -- local MiniStatusline = require("mini.statusline")
-    -- require("mini.statusline").setup({
-    --   content = {
-    --     active = function()
-    --       local git = MiniStatusline.section_git()
-    --       local diff = MiniStatusline.section_diff()
-    --       local diagnostics = MiniStatusline.section_diagnostics()
-    --       local lsp = MiniStatusline.section_lsp()
-    --
-    --       return MiniStatusline.combine_groups({
-    --         { content = git, hl = "MiniStatuslineDevinfo" },
-    --         { content = diff, hl = "MiniStatuslineDevinfo" },
-    --         { content = diagnostics, hl = "MiniStatuslineDevinfo" },
-    --         { content = lsp, hl = "MiniStatuslineDevinfo", right = true },
-    --       })
-    --     end,
-    --   },
-    -- })
-
-    --- statusline
-    -- require("mini.statusline").setup()
-
-    -- --- statusline
-    -- local statusline = require("mini.statusline")
-    -- statusline.setup({
-    --   content = {
-    --     active = function()
-    --       local mode, mode_hl = statusline.section_mode({ trunc_width = 120 })
-    --       local git = statusline.section_git({ trunc_width = 40 })
-    --       local diff = statusline.section_diff({ trunc_width = 75 })
-    --       local diagnostics = statusline.section_diagnostics({ trunc_width = 75 })
-    --       local lsp = statusline.section_lsp({ trunc_width = 75 })
-    --       local filename = statusline.section_filename({ trunc_width = 140 })
-    --       local fileinfo = statusline.section_fileinfo({ trunc_width = 120 })
-    --       local location = statusline.section_location({ trunc_width = 75 })
-    --       local search = statusline.section_searchcount({ trunc_width = 75 })
-    --
-    --       return statusline.combine_groups({
-    --         { hl = mode_hl, strings = { mode } },
-    --         { hl = "MiniStatuslineDevinfo", strings = { lsp } },
-    --         "%<", -- Mark general truncate point
-    --         { hl = "MiniStatuslineFilename", strings = { filename, git, diff } },
-    --         "%=", -- End left alignment
-    --         { hl = "MiniStatuslineFileinfo", strings = { diagnostics } },
-    --         { hl = mode_hl, strings = { search } },
-    --       })
-    --     end,
-    --   },
-    -- })
-
-    -- -- Evil-lualine-ish palette (gruvbox-y; tweak to taste)
-    -- local c = {
-    --   bg       = "#202328",
-    --   fg       = "#bbc2cf",
-    --   yellow   = "#ECBE7B",
-    --   cyan     = "#008080",
-    --   darkblue = "#081633",
-    --   green    = "#98be65",
-    --   orange   = "#FF8800",
-    --   violet   = "#a9a1e1",
-    --   magenta  = "#c678dd",
-    --   blue     = "#51afef",
-    --   red      = "#ec5f67",
-    -- }
   end,
 }
