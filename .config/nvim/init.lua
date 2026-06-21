@@ -1,5 +1,3 @@
---- GLOBALS ---
-
 vim.g.mapleader = " "             -- Must define first before plugins are loaded
 
 --- OPTIONS ---
@@ -12,11 +10,10 @@ vim.opt.colorcolumn = "80"        -- Line length marker (default: "")
 vim.opt.scrolloff = 8             -- Keep 8 lines visible above/below cursor (default: 0)
 vim.opt.termguicolors = true      -- 24-bit RGB colors in the TUI (default: false)
 vim.opt.showmode = false          -- Don't show mode in cmdline; statusline plugins handle it (default: true)
+vim.opt.laststatus = 3            -- Enable global statusline at the bottom (default: 2)
 vim.opt.cursorline = true         -- Highlight the current cursor line with CursorLine (default: false)
 vim.opt.cursorlineopt = "number"  -- Highlight only the line number, not the entire line (default: "both")
 vim.opt.cmdheight = 0             -- Hide command line when idle to remove the bottom gap (default: 1)
-vim.opt.laststatus = 3            -- XXX
-vim.opt.pumheight = 16            -- XXX
 vim.opt.pumborder = "rounded"     -- The border style of popupmenu windows (default: "")
 vim.opt.winborder = "rounded"     -- The border style of floating windows (default: "")
 -- Indentation
@@ -26,7 +23,6 @@ vim.opt.tabstop = 2               -- Spaces a <Tab> counts for (default: 8)
 vim.opt.shiftwidth = 2            -- Spaces per indent level (default: 8)
 vim.opt.softtabstop = -1          -- Makes <Tab> behave like shiftwidth (default: 0)
 -- Search
--- vim.opt.hlsearch = true           -- Highlight matches; the search-count badge keys off this (default: true)
 vim.opt.ignorecase = true         -- Case-insensitive search (default: false)
 vim.opt.smartcase = true          -- Case-sensitive if query has uppercase (default: false)
 -- Text
@@ -137,9 +133,7 @@ vim.api.nvim_create_autocmd("FileType", {
   group = augroup("close_with_q"),
   pattern = {
     "mininotify-history",
-    -- "PlenaryTestPopup",
-    -- "checkhealth",
-    -- "dbout",
+    "checkhealth",
     -- "gitsigns-blame",
     -- "help",
     -- "lspinfo",
@@ -229,8 +223,32 @@ require("lazy").setup({
   },
   install = { colorscheme = { "monokai-pro" } },
   checker = { enabled = true },
+  rocks = { enabled = false },
 })
 
 --- References ---
 -- https://neovim.io/doc/user/options/
+-- https://github.com/ibhagwan/vim-cheatsheet
+
+--- Examples ---
 -- https://github.com/nvim-lua/kickstart.nvim/blob/master/init.lua
+
+--- Bookmarks ---
+-- https://github.com/sheng-tse/jupynvim
+-- https://github.com/r4ppz/lspeek.nvim
+-- https://github.com/cursortab/cursortab.nvim
+-- https://github.com/max-sixty/worktrunk
+
+--- TODO ---
+-- color highlight toggle
+-- mini highlights
+-- incline current file highlight
+-- vim-test in
+-- tablines (winlines?)
+-- fzf configs
+-- cmdline color
+-- tab / s+tab for navigation
+-- lazygit
+-- mini.git (for blame?)
+-- sql client
+-- http client
