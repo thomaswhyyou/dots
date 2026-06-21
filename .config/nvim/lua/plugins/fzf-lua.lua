@@ -2,7 +2,6 @@
 -- TODO: Clean up the configs
 return {
   "ibhagwan/fzf-lua",
-  dependencies = { "nvim-mini/mini.icons" },
   -- stylua: ignore
   keys = {
     -- Shortcuts

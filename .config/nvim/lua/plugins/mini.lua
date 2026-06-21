@@ -1,4 +1,5 @@
 -- https://github.com/nvim-mini/mini.nvim/
+-- https://nvim-mini.org/mini.nvim/
 return {
   "nvim-mini/mini.nvim",
   version = false,
@@ -18,6 +19,9 @@ return {
     })
 
     require("mini.notify").setup({
+      lsp_progress = {
+        enable = false,
+      },
       window = {
         config = { anchor = "SE", row = vim.o.lines - 1 },
       },
@@ -41,7 +45,7 @@ return {
       },
       options = {
         -- Max number of lines above or below within which scope is computed
-        n_lines = 100,
+        n_lines = 80,
       },
       symbol = "▏",
     })
@@ -85,7 +89,6 @@ return {
 
     -- require("mini.jump").setup()
 
-
     --- mini.statusline ---
     -- local MiniStatusline = require("mini.statusline")
     -- require("mini.statusline").setup({
@@ -107,7 +110,7 @@ return {
     -- })
 
     --- statusline
-    require("mini.statusline").setup()
+    -- require("mini.statusline").setup()
 
     -- --- statusline
     -- local statusline = require("mini.statusline")
@@ -151,19 +154,5 @@ return {
     --   blue     = "#51afef",
     --   red      = "#ec5f67",
     -- }
-    --
-    -- -- Mode block colors (left/right edges in evil_lualine)
-    -- vim.api.nvim_set_hl(0, "MiniStatuslineModeNormal",  { fg = c.bg, bg = c.green,  bold = true })
-    -- vim.api.nvim_set_hl(0, "MiniStatuslineModeInsert",  { fg = c.bg, bg = c.blue,   bold = true })
-    -- vim.api.nvim_set_hl(0, "MiniStatuslineModeVisual",  { fg = c.bg, bg = c.magenta,bold = true })
-    -- vim.api.nvim_set_hl(0, "MiniStatuslineModeReplace", { fg = c.bg, bg = c.red,    bold = true })
-    -- vim.api.nvim_set_hl(0, "MiniStatuslineModeCommand", { fg = c.bg, bg = c.yellow, bold = true })
-    -- vim.api.nvim_set_hl(0, "MiniStatuslineModeOther",   { fg = c.bg, bg = c.cyan,   bold = true })
-    --
-    -- -- Middle sections
-    -- vim.api.nvim_set_hl(0, "MiniStatuslineDevinfo",  { fg = c.fg,     bg = "#3b4048" })
-    -- vim.api.nvim_set_hl(0, "MiniStatuslineFilename", { fg = c.violet, bg = c.bg, bold = true })
-    -- vim.api.nvim_set_hl(0, "MiniStatuslineFileinfo", { fg = c.fg,     bg = "#3b4048" })
-    -- vim.api.nvim_set_hl(0, "MiniStatuslineInactive", { fg = c.fg,     bg = c.bg })
   end,
 }

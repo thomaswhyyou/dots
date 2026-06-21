@@ -66,7 +66,7 @@ return {
         -- Make Search highlights brighter
         -- Search = { bg = c.base.dimmed1, fg = c.base.black, bold = true },
 
-        -- Search = { bg = c.base.dimmed3, fg = c.base.white },
+        Search = { bg = c.base.dimmed3, fg = c.base.white },
         -- Search = { bg = ch.blend(c.base.yellow, 0.35, c.editor.background) },
         -- Search = { bg = c.base.dimmed3 },
         -- Search = { bg = c.base.dimmed1, fg = c.base.black },
