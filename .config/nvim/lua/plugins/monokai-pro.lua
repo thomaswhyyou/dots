@@ -47,13 +47,12 @@ return {
       "which-key",
     },
     override = function(c)
-      local mc = require("mini.colors")
-      -- local ch = require("monokai-v2.color_helper")
+      local ch = require("mini.colors")
 
       return {
         -- Make ColorColumn slightly darker than the background
         ColorColumn = {
-          bg = mc.modify_channel(c.editor.background, "lightness", function(l)
+          bg = ch.modify_channel(c.editor.background, "lightness", function(l)
             return l - 1
           end),
         },
@@ -64,12 +63,7 @@ return {
         -- Make the cursor line number brighter
         CursorLineNr = { link = "Todo" },
         -- Make Search highlights brighter
-        -- Search = { bg = c.base.dimmed1, fg = c.base.black, bold = true },
-
         Search = { bg = c.base.dimmed3, fg = c.base.white },
-        -- Search = { bg = ch.blend(c.base.yellow, 0.35, c.editor.background) },
-        -- Search = { bg = c.base.dimmed3 },
-        -- Search = { bg = c.base.dimmed1, fg = c.base.black },
       }
     end,
   },
