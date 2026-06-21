@@ -1,13 +1,8 @@
 -- https://github.com/stevearc/oil.nvim
 return {
   "stevearc/oil.nvim",
-  lazy = false, -- Lazy loading is not recommended.
-  -- dependencies = {
-  --   { "nvim-mini/mini.nvim", opts = {} },
-  -- },
-  dependencies = {
-    { "nvim-mini/mini.icons", opts = {} },
-  },
+  -- Lazy loading is not recommended.
+  lazy = false,
   config = function()
     require("oil").setup({
       default_file_explorer = true,
@@ -55,11 +50,5 @@ return {
         end
       end,
     })
-
-    -- XXX: OilDir
-    -- https://github.com/loctvl842/monokai-pro.nvim/issues/137
-    -- OilDir = {
-    --   bg = c.editor.background,
-    -- }
   end,
 }
