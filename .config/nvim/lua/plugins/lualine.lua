@@ -6,7 +6,7 @@ return {
   config = function()
     local theme = require("lualine.themes.auto")
     -- Constant text/background color (don't follow the per-mode theme).
-    local normal_b = { fg = theme.normal.b.fg, bg = theme.normal.b.bg };
+    local normal_b = { fg = theme.normal.b.fg, bg = theme.normal.b.bg }
 
     require("lualine").setup({
       options = {
@@ -25,7 +25,9 @@ return {
         lualine_a = {
           {
             "mode",
-            fmt = function(s) return s:sub(1, 1) end,
+            fmt = function(s)
+              return s:sub(1, 1)
+            end,
             color = { gui = "bold" },
           },
         },
@@ -36,14 +38,16 @@ return {
             color = normal_b,
             fmt = function(name)
               -- Truncate long branch names: first 16 + … + last 4.
-              if #name <= 20 then return name end
+              if #name <= 20 then
+                return name
+              end
               return name:sub(1, 16) .. "…" .. name:sub(-4)
             end,
           },
         },
         lualine_c = {
           { "filetype", icon_only = true, padding = { left = 1, right = 0 } },
-          { "filename", path = 1, padding = { left = 0, right = 1 }, },
+          { "filename", path = 1, padding = { left = 0, right = 1 } },
           { "diff" },
         },
 
