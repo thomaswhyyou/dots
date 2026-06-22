@@ -4,16 +4,20 @@ return {
   "nvim-mini/mini.nvim",
   version = false,
   config = function()
-    -- require("mini.ai").setup()
+    -- https://nvim-mini.org/mini.nvim/readmes/mini-ai.html
+    require("mini.ai").setup()
+
+    -- https://nvim-mini.org/mini.nvim/readmes/mini-surround.html
+    require("mini.surround").setup()
+
+    -- https://nvim-mini.org/mini.nvim/readmes/mini-pairs.html
+    require("mini.pairs").setup()
 
     -- https://nvim-mini.org/mini.nvim/readmes/mini-bufremove.html
     require("mini.bufremove").setup()
 
     -- https://nvim-mini.org/mini.nvim/readmes/mini-bracketed.html
     require("mini.bracketed").setup()
-
-    -- https://nvim-mini.org/mini.nvim/readmes/mini-pairs.html
-    require("mini.pairs").setup()
 
     -- https://nvim-mini.org/mini.nvim/readmes/mini-git.html
     require("mini.git").setup()
@@ -61,39 +65,18 @@ return {
     })
     vim.api.nvim_set_hl(0, "MiniIndentscopeSymbol", { link = "Comment" })
 
-    --- mini.hipatterns ---
-    -- require('mini.hipatterns').setup({
-    --   highlighters = {
-    --     -- Highlight markdown horizontal rules (3+ dashes)
-    --     markdown_hr = {
-    --       pattern = '^%-%-%-+%s*$',
-    --       group = 'MiniHipatternsMarkdownHR',
-    --     },
-    --   },
-    -- })
-    -- -- Define the highlight group with blue color
-    -- vim.api.nvim_set_hl(0, 'MiniHipatternsMarkdownHR', { fg = '#6495ED', bold = true })
-
-    -- require('mini.hipatterns').setup({
-    --   highlighters = {
-    --     triple_dash = {
-    --       pattern = function(buf_id)
-    --         return '^[%s#/]*()%-%-%-()'
-    --       end,
-    --       group = '',
-    --       extmark_opts = function(buf_id, match, data)
-    --         return {
-    --           end_row = data.line - 1,
-    --           end_col = 0,
-    --           hl_eol = true,
-    --           hl_group = 'MiniHipatternsTripleDash',
-    --           line_hl_group = 'MiniHipatternsTripleDash',
-    --           priority = 200,
-    --         }
-    --       end,
-    --     },
-    --   },
-    -- })
-    -- vim.api.nvim_set_hl(0, 'MiniHipatternsTripleDash', { fg = '#6495ED' })
+    -- https://nvim-mini.org/mini.nvim/readmes/mini-hipatterns.html
+    require("mini.hipatterns").setup({
+      highlighters = {
+        xxx = { pattern = "%f[%w]()XXX()%f[%W]", group = "MiniHipatternsXXX" },
+        fixme = { pattern = "%f[%w]()FIXME()%f[%W]", group = "MiniHipatternsXXX" },
+        hack = { pattern = "%f[%w]()HACK()%f[%W]", group = "MiniHipatternsXXX" },
+        todo = { pattern = "%f[%w]()TODO()%f[%W]", group = "MiniHipatternsXXX" },
+        note = { pattern = "%f[%w]()NOTE()%f[%W]", group = "MiniHipatternsXXX" },
+        triple_dash = { pattern = "^()%s*%-%-%-.*()$", group = "MiniHipatternsDDD" },
+      },
+    })
+    vim.api.nvim_set_hl(0, "MiniHipatternsXXX", { fg = "#FFFFFF", bold = true })
+    vim.api.nvim_set_hl(0, "MiniHipatternsDDD", { fg = "#78dce8" })
   end,
 }

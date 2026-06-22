@@ -30,6 +30,8 @@ return {
         CursorLineNr = { link = "Todo" },
         -- Make Search highlights brighter
         Search = { bg = c.base.dimmed3, fg = c.base.white },
+        -- Incline window title currently focused
+        InclineNormal = { fg = c.base.dimmed5, bg = c.base.yellow, bold = true },
       }
     end,
   },

@@ -253,17 +253,16 @@ require("lazy").setup({
 -- https://github.com/max-sixty/worktrunk
 -- https://github.com/stevearc/quicker.nvim
 
---- TODO ---
--- mini highlights
--- incline current file highlight
+--- Todo ---
+-- terminal just horizontal
 -- vim-test
--- tablines (winlines?)
--- fzf configs
 -- cmdline color
 -- tab / s+tab for navigation
+-- fzf configs
 -- lazygit
 -- mini.git (for blame?)
--- keyboard to reload a buffer
 -- sql client
 -- http client
+-- nvim-tree
+-- tablines (winlines?)
 -- neovim native autocomplete when mature
