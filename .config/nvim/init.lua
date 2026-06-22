@@ -1,4 +1,6 @@
-vim.g.mapleader = " "             -- Must define first before plugins are loaded
+-- Must define first before plugins are loaded
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 --- OPTIONS ---
 
@@ -85,6 +87,11 @@ vim.keymap.set("n", "p", "p`]", { noremap = true, silent = true })
 -- In visual mode, replace the selection without clobbering the unnamed register
 -- (delete into the black hole), then jump to the end of the pasted text.
 vim.keymap.set("x", "p", '"_dP`]', { noremap = true, silent = true })
+-- Toggle document colors (global scope, default off).
+vim.keymap.set("n", "<leader>uc", function()
+  vim.lsp.document_color.enable(not vim.lsp.document_color.is_enabled())
+end, { desc = "Toggle document colors" })
+vim.lsp.document_color.enable(false)
 
 --- AUTOCMDS ---
 
@@ -134,8 +141,7 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = {
     "mininotify-history",
     "checkhealth",
-    -- "gitsigns-blame",
-    -- "help",
+    "help",
     -- "lspinfo",
     -- "notify",
     -- "qf",
@@ -229,27 +235,35 @@ require("lazy").setup({
 --- References ---
 -- https://neovim.io/doc/user/options/
 -- https://github.com/ibhagwan/vim-cheatsheet
+-- https://github.com/mhinz/vim-galore
 
 --- Examples ---
--- https://github.com/nvim-lua/kickstart.nvim/blob/master/init.lua
+-- https://github.com/nvim-lua/kickstart.nvim
+-- https://github.com/CosmicNvim/CosmicNvim
+-- https://github.com/NormalNvim/NormalNvim
+-- https://github.com/AstroNvim/AstroNvim
+-- https://github.com/LunarVim/LunarVim
+-- https://github.com/jellydn/tiny-nvim
 
---- Bookmarks ---
+--- Plugins ---
 -- https://github.com/rachartier/tiny-cmdline.nvim
 -- https://github.com/sheng-tse/jupynvim
 -- https://github.com/r4ppz/lspeek.nvim
 -- https://github.com/cursortab/cursortab.nvim
 -- https://github.com/max-sixty/worktrunk
+-- https://github.com/stevearc/quicker.nvim
 
 --- TODO ---
--- color highlight toggle
 -- mini highlights
 -- incline current file highlight
--- vim-test in
+-- vim-test
 -- tablines (winlines?)
 -- fzf configs
 -- cmdline color
 -- tab / s+tab for navigation
 -- lazygit
 -- mini.git (for blame?)
+-- keyboard to reload a buffer
 -- sql client
 -- http client
+-- neovim native autocomplete when mature
