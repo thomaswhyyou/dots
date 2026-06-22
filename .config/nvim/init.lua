@@ -182,10 +182,13 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 -- Turn on cursorline and relativenumber in the currently focused buffer only.
+-- Restrict to real file buffers (buftype == ""), which excludes special windows
+-- like NvimTree, help, quickfix, and terminals.
 local active_buffer_group = augroup("active_buffer")
 vim.api.nvim_create_autocmd({ "VimEnter", "WinEnter" }, {
   group = active_buffer_group,
   callback = function()
+    if vim.bo.buftype ~= "" then return end
     vim.opt_local.cursorline = true
     vim.opt_local.relativenumber = true
   end,
@@ -193,8 +196,9 @@ vim.api.nvim_create_autocmd({ "VimEnter", "WinEnter" }, {
 vim.api.nvim_create_autocmd("WinLeave", {
   group = active_buffer_group,
   callback = function()
-    vim.opt.cursorline = false
-    vim.opt.relativenumber = false
+    if vim.bo.buftype ~= "" then return end
+    vim.opt_local.cursorline = false
+    vim.opt_local.relativenumber = false
   end,
 })
 
@@ -256,13 +260,10 @@ require("lazy").setup({
 --- Todo ---
 -- terminal just horizontal
 -- vim-test
--- cmdline color
 -- tab / s+tab for navigation
 -- fzf configs
 -- lazygit
 -- mini.git (for blame?)
--- sql client
--- http client
 -- nvim-tree
 -- tablines (winlines?)
 -- neovim native autocomplete when mature
