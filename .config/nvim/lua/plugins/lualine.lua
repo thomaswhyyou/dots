@@ -10,15 +10,13 @@ return {
 
     require("lualine").setup({
       options = {
-        -- No separators between components within a section.
-        component_separators = "",
-        -- Diagonal slant between sections
-        section_separators = {
+        always_show_tabline = false,
+        component_separators = "", -- No separators between components within a section.
+        section_separators = { -- Diagonal slant between sections
           left = vim.fn.nr2char(0xE0B8), -- nf-ple-lower_left_triangle (\)
           right = vim.fn.nr2char(0xE0BA), -- nf-ple-lower_right_triangle (/)
         },
-        -- Single statusline for the whole editor (laststatus = 3).
-        globalstatus = true,
+        globalstatus = true, -- Single statusline for the whole editor (laststatus = 3).
       },
       sections = {
         -- Left hand side
@@ -64,6 +62,14 @@ return {
           { "%l:%-2v %L", color = normal_b },
         },
         lualine_z = { "searchcount" },
+      },
+      tabline = {
+        lualine_z = {
+          {
+            "tabs",
+            section_separators = { left = "", right = "" },
+          },
+        },
       },
     })
   end,
