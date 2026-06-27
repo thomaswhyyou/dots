@@ -22,7 +22,9 @@ return {
             return l - 1
           end),
         },
-        -- Color Oil directories cyan
+        -- Popup window title
+        FloatTitle = { link = "CursorColumn" },
+        -- Oil directories cyan
         Directory = { fg = c.base.cyan, bg = c.editor.background, bold = true },
         -- Keep CurSearch identical to IncSearch
         CurSearch = { link = "IncSearch" },
@@ -30,8 +32,10 @@ return {
         CursorLineNr = { link = "Todo" },
         -- Make Search highlights brighter
         Search = { bg = c.base.dimmed3, fg = c.base.white },
-        -- Incline window title currently focused
-        InclineNormal = { fg = c.base.dimmed5, bg = c.base.yellow, bold = true },
+
+        -- Incline: window titles
+        InclineNormal = { fg = c.base.yellow, bg = c.base.dimmed5, bold = true },
+        InclineNormalNC = { bg = c.base.dimmed5 },
       }
     end,
   },
