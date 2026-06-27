@@ -37,11 +37,11 @@ return {
             icon = vim.fn.nr2char(0xF418), -- nf-oct-git_branch
             color = normal_b,
             fmt = function(name)
-              -- Truncate long branch names: first 16 + … + last 4.
-              if #name <= 20 then
+              -- Truncate long branch names: first 48 + … + last 4.
+              if #name <= 48 then
                 return name
               end
-              return name:sub(1, 16) .. "…" .. name:sub(-4)
+              return name:sub(1, 44) .. "…" .. name:sub(-4)
             end,
           },
         },
