@@ -5,12 +5,17 @@ return {
   config = function()
     require("overlook").setup({
       ui = {
-        size_ratio = 0.95,              -- Default size ratio (0.0 to 1.0)
+        size_ratio = 1, -- Default size ratio (0.0 to 1.0)
+        row_offset = 0,
+        col_offset = 0,
+        min_width = 120,
       },
     })
 
     local api = require("overlook.api")
+    vim.keymap.set("n", "gD", api.peek_definition, { desc = "Peek definition" })
     vim.keymap.set("n", "gpd", api.peek_definition, { desc = "Peek definition" })
+
     vim.keymap.set("n", "gpp", api.peek_cursor, { desc = "Peek cursor" })
     vim.keymap.set("n", "gpu", api.restore_popup, { desc = "Restore last popup" })
     vim.keymap.set("n", "gpU", api.restore_all_popups, { desc = "Restore all popups" })
