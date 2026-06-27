@@ -5,7 +5,7 @@ return {
   version = "1.*",
   opts = {
     enabled = function()
-      return not vim.tbl_contains({ "NvimTreeFilter" }, vim.bo.filetype)
+      return not vim.tbl_contains({ "NvimTreeFilter", "grug-far" }, vim.bo.filetype)
     end,
     -- C-space: Open menu or open docs if already open
     -- C-n/C-p or Up/Down: Select next/previous item
