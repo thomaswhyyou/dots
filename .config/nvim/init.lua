@@ -255,7 +255,6 @@ require("lazy").setup({
 --- Plugins ---
 -- https://github.com/rachartier/tiny-cmdline.nvim
 -- https://github.com/sheng-tse/jupynvim
--- https://github.com/r4ppz/lspeek.nvim
 -- https://github.com/cursortab/cursortab.nvim
 -- https://github.com/max-sixty/worktrunk
 
@@ -265,6 +264,5 @@ require("lazy").setup({
 -- mini.git (for blame?)
 -- fzf configs, toggle between grug-far
 -- vim-test
--- tablines (winlines?)
 -- vim.o.autocomplete
 -- finish porting over the old nvim configs
