@@ -142,10 +142,9 @@ vim.api.nvim_create_autocmd("FileType", {
     "mininotify-history",
     "checkhealth",
     "help",
+    "qf",
     -- "lspinfo",
     -- "notify",
-    -- "qf",
-    -- "spectre_panel",
     -- "startuptime",
   },
   callback = function(event)
@@ -255,17 +254,13 @@ require("lazy").setup({
 -- https://github.com/r4ppz/lspeek.nvim
 -- https://github.com/cursortab/cursortab.nvim
 -- https://github.com/max-sixty/worktrunk
--- https://github.com/stevearc/quicker.nvim
--- https://github.com/nvim-pack/nvim-spectre
--- https://github.com/MagicDuck/grug-far.nvim
 
---- Todo ---
--- terminal just horizontal
+--- Todos ---
 -- tab / s+tab for navigation
 -- lazygit
 -- mini.git (for blame?)
+-- fzf configs, toggle between grug-far
 -- vim-test
--- fzf configs
 -- tablines (winlines?)
--- neovim native autocomplete when mature
+-- vim.o.autocomplete
 -- finish porting over the old nvim configs
