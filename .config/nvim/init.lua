@@ -92,6 +92,10 @@ vim.keymap.set("n", "<leader>uc", function()
   vim.lsp.document_color.enable(not vim.lsp.document_color.is_enabled())
 end, { desc = "Toggle document colors" })
 vim.lsp.document_color.enable(false)
+-- Jump straight to a tab by number with <A-N>.
+for i = 1, 9 do
+  vim.keymap.set("n", "<A-" .. i .. ">", i .. "gt", { desc = "Go to tab " .. i })
+end
 
 --- AUTOCMDS ---
 
