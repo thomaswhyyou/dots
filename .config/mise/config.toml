@@ -1,8 +1,12 @@
-[plugins]
-  dexter = "https://github.com/remoteoss/dexter.git"
+# [bootstrap.packages]
+# "brew:jj" = "latest"
+# # GUI apps
+# "brew-cask:spotify" = "latest"
+# "brew-cask:itsycal" = "latest"
 
 [tools]
 claude-code = "latest"
+codex = "latest"
 tree-sitter = "latest"
 # rust
 rust-analyzer = "latest" # keep ahead of rust in PATH
@@ -13,11 +17,8 @@ stylua = "latest"
 # erlang / elixir
 erlang = "latest"
 elixir = "latest"
-"aqua:elixir-lang/expert" = "latest"
-dexter = "latest"
+"aqua:remoteoss/dexter" = "latest"
 # js / node
 node = "latest"
 pnpm = "latest"
 "npm:@typescript/native-preview" = "latest"
-"npm:@mariozechner/pi-coding-agent" = "latest"
-"npm:hunkdiff" = "latest"
