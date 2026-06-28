@@ -260,7 +260,6 @@ require("lazy").setup({
 
 --- Todos ---
 -- tab / s+tab for navigation
--- lazygit
 -- mini.git (for blame?)
 -- fzf configs, toggle between grug-far
 -- vim-test

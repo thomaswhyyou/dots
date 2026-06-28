@@ -32,5 +32,27 @@ return {
         vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { buffer = ev.buf })
       end,
     })
+
+    local Terminal = require("toggleterm.terminal").Terminal
+
+    -- Lazygit
+    local lazygit = Terminal:new({
+      cmd = "lazygit",
+      dir = "git_dir",
+      direction = "float",
+      display_name = "lazygit",
+      hidden = true,
+      on_open = function(term)
+        vim.cmd("startinsert!")
+        vim.keymap.set("n", "q", "<cmd>close<CR>", { buffer = term.bufnr, silent = true })
+      end,
+    })
+    vim.keymap.set("n", "<leader>gg", function()
+      if vim.fn.executable("lazygit") == 0 then
+        vim.notify("lazygit is not installed", vim.log.levels.WARN)
+        return
+      end
+      lazygit:toggle()
+    end, { desc = "Lazygit" })
   end,
 }
