@@ -23,8 +23,8 @@ return {
           end),
         },
         -- Popup window title
-        FloatTitle = { link = "CursorColumn" },
-        -- Oil directories cyan
+        FloatTitle = { fg = c.base.yellow, bg = c.base.dimmed5 },
+        -- Make directories cyan in Oil
         Directory = { fg = c.base.cyan, bg = c.editor.background, bold = true },
         -- Keep CurSearch identical to IncSearch
         CurSearch = { link = "IncSearch" },
