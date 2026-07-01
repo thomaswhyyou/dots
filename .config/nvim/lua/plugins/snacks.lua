@@ -6,6 +6,7 @@ return {
     local s = require("snacks")
 
     s.setup({
+      bigfile = {},
       zen = {
         toggles = {
           dim = false,
