@@ -11,7 +11,7 @@ return {
     filter = "pro",
     background_clear = {
       "which-key",
-      "snacks"
+      "snacks",
     },
     override = function(c)
       local ch = require("mini.colors")
@@ -30,13 +30,21 @@ return {
         -- Keep CurSearch identical to IncSearch
         CurSearch = { link = "IncSearch" },
         -- Make the cursor line number brighter
-        CursorLineNr = { link = "Todo" },
+        CursorLineNr = { fg = c.base.yellow },
         -- Make Search highlights brighter
         Search = { bg = c.base.dimmed3, fg = c.base.white },
 
-        -- Incline: window titles
+        -- incline: window titles
         InclineNormal = { fg = c.base.yellow, bg = c.base.dimmed5, bold = true },
         InclineNormalNC = { bg = c.base.dimmed5 },
+        -- mini.diff: sign colors (link them to monokai defined colors)
+        MiniDiffSignAdd = { link = "DiffAdded" },
+        MiniDiffSignChange = { link = "DiffChanged" },
+        MiniDiffSignDelete = { link = "DiffRemoved" },
+        -- lualine: diff colors (link them to monokai defined colors)
+        LuaLineDiffAdd = { link = "DiffAdded" },
+        LuaLineDiffChange = { link = "DiffChanged" },
+        LuaLineDiffDelete = { link = "DiffRemoved" },
       }
     end,
   },
