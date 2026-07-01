@@ -50,8 +50,8 @@ return {
         config = { anchor = "SE", row = vim.o.lines - 1 },
       },
     })
+    -- Toggle notification history
     vim.keymap.set("n", "<leader>n", function()
-      -- Toggle: if the history window is already open, close it
       for _, win in ipairs(vim.api.nvim_list_wins()) do
         local buf = vim.api.nvim_win_get_buf(win)
         if vim.bo[buf].filetype == "mininotify-history" then
@@ -62,6 +62,10 @@ return {
       vim.cmd("botright 20split") -- full-width split, 20 rows tall, at the bottom
       require("mini.notify").show_history() -- swaps the history buffer into that new split
     end, { desc = "Notification history" })
+    -- Clear all notifications
+    vim.keymap.set("n", "<leader>un", function()
+      require("mini.notify").clear()
+    end, { desc = "Dismiss All Notifications" })
 
     -- https://nvim-mini.org/mini.nvim/readmes/mini-indentscope.html
     require("mini.indentscope").setup({
@@ -88,3 +92,13 @@ return {
     vim.api.nvim_set_hl(0, "MiniHipatternsDDD", { fg = "#78dce8" })
   end,
 }
+
+-- No-go:
+-- mini.clue: whick-key
+-- mini.cmdline: blink
+-- mini.deps: vim.pack
+-- mini.jump: flash
+-- mini.jump2d: flash
+-- mini.pick: fzf-lua
+-- mini.statusline: lualine
+-- mini.tabline: lualine
