@@ -49,6 +49,20 @@ return {
     -- Diagnostics toggle
     vim.keymap.set("n", "<leader>ud", function() s.toggle.diagnostics():toggle() end, { desc = "Toggle Diagnostics" })
 
+    -- Indent guide toggle (mini.indentscope)
+    s.toggle
+      .new({
+        name = "Indent Guide",
+        get = function() return not vim.g.miniindentscope_disable end,
+        set = function(on)
+          local ok, mi = pcall(require, "mini.indentscope")
+          if not ok then return end
+          vim.g.miniindentscope_disable = not on
+          if on then mi.draw() else mi.undraw() end
+        end,
+      })
+      :map("<leader>ug")
+
     -- Terminal toggle
     -- Ctrl+/ arrives as <C-/> in modern terminals (CSI-u/Kitty protocol) but as
     -- <C-_> (0x1F) in legacy ones, so bind both to cover either encoding.
