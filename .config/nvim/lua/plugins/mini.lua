@@ -11,7 +11,19 @@ return {
     require("mini.surround").setup()
 
     -- https://nvim-mini.org/mini.nvim/readmes/mini-pairs.html
-    require("mini.pairs").setup()
+    require("mini.pairs").setup({
+      -- Only auto-pair at end-of-line. `neigh_pattern` matches the chars around
+      -- the cursor; end-of-line is `\n`, so `[^\\]\n` = "not after a backslash,
+      -- nothing ahead". `%a` also excludes quotes inside words (e.g. don't).
+      mappings = {
+        ["("] = { neigh_pattern = "[^\\]\n" },
+        ["["] = { neigh_pattern = "[^\\]\n" },
+        ["{"] = { neigh_pattern = "[^\\]\n" },
+        ['"'] = { neigh_pattern = "[^\\]\n" },
+        ["'"] = { neigh_pattern = "[^%a\\]\n" },
+        ["`"] = { neigh_pattern = "[^\\]\n" },
+      },
+    })
 
     -- https://nvim-mini.org/mini.nvim/readmes/mini-bufremove.html
     require("mini.bufremove").setup()
