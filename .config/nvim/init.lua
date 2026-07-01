@@ -141,7 +141,6 @@ vim.api.nvim_create_autocmd("FileType", {
     "qf",
     -- "lspinfo",
     -- "notify",
-    -- "startuptime",
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
@@ -248,7 +247,6 @@ require("lazy").setup({
 -- tab / s+tab for navigation
 -- mini.git (for blame?)
 -- fzf configs, toggle between grug-far
--- vim-test
 -- vim.o.autocomplete
 -- finish porting over the old nvim configs
 -- https://github.com/cursortab/cursortab.nvim
