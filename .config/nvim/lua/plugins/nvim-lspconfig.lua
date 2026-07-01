@@ -1,6 +1,5 @@
--- https://github.com/neovim/nvim-lspconfig
 return {
-  "neovim/nvim-lspconfig",
+  "https://github.com/neovim/nvim-lspconfig",
   config = function()
     vim.lsp.enable({
       "lua_ls",

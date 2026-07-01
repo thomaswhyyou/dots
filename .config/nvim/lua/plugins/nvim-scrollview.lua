@@ -1,2 +1,6 @@
--- https://github.com/dstein64/nvim-scrollview
-return { "dstein64/nvim-scrollview", opts = { current_only = true } }
+return {
+  "https://github.com/dstein64/nvim-scrollview",
+  config = function()
+    require("scrollview").setup({ current_only = true })
+  end,
+}

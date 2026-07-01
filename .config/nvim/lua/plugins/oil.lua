@@ -1,6 +1,5 @@
--- https://github.com/stevearc/oil.nvim
 return {
-  "stevearc/oil.nvim",
+  "https://github.com/stevearc/oil.nvim",
   -- Lazy loading is not recommended.
   lazy = false,
   config = function()

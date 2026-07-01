@@ -1,6 +1,5 @@
--- https://github.com/stevearc/quicker.nvim
 return {
-  "stevearc/quicker.nvim",
+  "https://github.com/stevearc/quicker.nvim",
   ft = "qf",
   config = function()
     require("quicker").setup({

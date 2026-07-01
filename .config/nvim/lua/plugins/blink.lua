@@ -1,6 +1,5 @@
--- https://github.com/saghen/blink.cmp
 return {
-  "saghen/blink.cmp",
+  "https://github.com/saghen/blink.cmp",
   dependencies = { "rafamadriz/friendly-snippets" },
   version = "1.*",
   opts = {

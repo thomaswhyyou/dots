@@ -1,7 +1,6 @@
--- https://github.com/jake-stewart/multicursor.nvim
 return {
   {
-    "jake-stewart/multicursor.nvim",
+    "https://github.com/jake-stewart/multicursor.nvim",
     branch = "1.0",
     config = function()
       local mc = require("multicursor-nvim")

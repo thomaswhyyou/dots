@@ -1,6 +1,5 @@
--- https://github.com/gbprod/yanky.nvim
 return {
-  "gbprod/yanky.nvim",
+  "https://github.com/gbprod/yanky.nvim",
   config = function()
     require("yanky").setup({
       highlight = {
@@ -9,6 +8,7 @@ return {
         timer = 200,
       },
     })
+    -- Preserve cursor position on yank
     vim.keymap.set({ "n", "x" }, "y", "<Plug>(YankyYank)")
   end,
 }
