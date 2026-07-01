@@ -1,6 +1,6 @@
--- https://github.com/akinsho/toggleterm.nvim
 return {
-  "akinsho/toggleterm.nvim",
+  "https://github.com/akinsho/toggleterm.nvim",
+  enabled = false, -- Using snacks terminal instead
   version = "*",
   config = function()
     require("toggleterm").setup({

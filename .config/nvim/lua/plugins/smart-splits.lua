@@ -16,6 +16,9 @@ return {
         if vim.w.is_overlook_popup then
           return
         end
+        if vim.w.snacks_main then
+          return
+        end
         move()
       end
     end

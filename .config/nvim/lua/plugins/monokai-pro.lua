@@ -1,7 +1,7 @@
--- https://github.com/khoido2003/monokai-v2.nvim
--- IMPORTANT: Must run :MonokaiCache clear command after making any changes.
+-- IMPORTANT:
+-- Must run :MonokaiCache clear command after making any changes.
 return {
-  "khoido2003/monokai-v2.nvim",
+  "https://github.com/khoido2003/monokai-v2.nvim",
   dependencies = {
     "nvim-tree/nvim-web-devicons",
   },
@@ -11,6 +11,7 @@ return {
     filter = "pro",
     background_clear = {
       "which-key",
+      "snacks"
     },
     override = function(c)
       local ch = require("mini.colors")
