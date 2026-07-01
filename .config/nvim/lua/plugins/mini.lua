@@ -66,15 +66,12 @@ return {
 
     -- https://nvim-mini.org/mini.nvim/readmes/mini-indentscope.html
     require("mini.indentscope").setup({
+      symbol = "▏",
       draw = {
         animation = require("mini.indentscope").gen_animation.none(),
       },
-      options = {
-        -- Max number of lines above or below within which scope is computed
-        n_lines = 80,
-      },
-      symbol = "▏",
     })
+    vim.g.miniindentscope_disable = true -- off by default
     vim.api.nvim_set_hl(0, "MiniIndentscopeSymbol", { link = "Comment" })
 
     -- https://nvim-mini.org/mini.nvim/readmes/mini-hipatterns.html
