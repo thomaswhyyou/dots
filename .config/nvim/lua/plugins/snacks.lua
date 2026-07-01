@@ -12,7 +12,7 @@ return {
         },
         win = {
           zindex = 60, -- Higher than incline displays
-          minimal = true, -- Strip UI chrome (numbers, signcolumn, statuscolumn, folds) for a distraction-free window.
+          minimal = true, -- Strip UI chrome (numbers, signcolumn, statuscolumn, folds)
           width = 120,
           backdrop = {
             transparent = false,
@@ -22,7 +22,6 @@ return {
           },
         },
       },
-
       terminal = {
         win = {
           position = "bottom",
@@ -34,7 +33,15 @@ return {
           },
         },
       },
+      lazygit = {
+        win = {
+          position = "float",
+        },
+      },
     })
+
+    -- Lazygit
+    vim.keymap.set("n", "<leader>gg", function() s.lazygit() end, { desc = "Lazygit" })
 
     -- Zen toggle
     vim.keymap.set("n", "<leader>uz", function() s.zen() end, { desc = "Toggle Zen Mode" })
@@ -47,6 +54,5 @@ return {
     -- <C-_> (0x1F) in legacy ones, so bind both to cover either encoding.
     vim.keymap.set({ "n", "t" }, "<C-/>", s.terminal.toggle, { noremap = true, silent = true })
     vim.keymap.set({ "n", "t" }, "<C-_>", s.terminal.toggle, { noremap = true, silent = true })
-
   end,
 }
