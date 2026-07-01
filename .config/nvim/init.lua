@@ -55,14 +55,6 @@ vim.opt.confirm = true            -- Prompt to save instead of erroring on :q (d
 vim.keymap.set({ "i", "n", "s" }, "<esc>", function()
   vim.cmd("noh")
   vim.cmd("call clearmatches()")
-  -- Deferred: closing windows is blocked under textlock in an expr mapping
-  -- vim.schedule(function()
-  --   for _, win in ipairs(vim.api.nvim_list_wins()) do
-  --     if vim.api.nvim_win_get_config(win).relative ~= "" then
-  --       pcall(vim.api.nvim_win_close, win, false) -- false = don't force
-  --     end
-  --   end
-  -- end)
   return "<esc>"
 end, { expr = true, desc = "Escape and Clear hlsearch" })
 -- Highlight word under cursor without moving (converted to Lua by ChatGTP)
@@ -252,12 +244,6 @@ require("lazy").setup({
 -- https://github.com/LunarVim/LunarVim
 -- https://github.com/jellydn/tiny-nvim
 
---- Plugins ---
--- https://github.com/rachartier/tiny-cmdline.nvim
--- https://github.com/sheng-tse/jupynvim
--- https://github.com/cursortab/cursortab.nvim
--- https://github.com/max-sixty/worktrunk
-
 --- Todos ---
 -- tab / s+tab for navigation
 -- mini.git (for blame?)
@@ -265,3 +251,4 @@ require("lazy").setup({
 -- vim-test
 -- vim.o.autocomplete
 -- finish porting over the old nvim configs
+-- https://github.com/cursortab/cursortab.nvim
