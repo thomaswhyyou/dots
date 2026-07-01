@@ -1,7 +1,6 @@
--- https://github.com/nvim-mini/mini.nvim/
 -- https://nvim-mini.org/mini.nvim/
 return {
-  "nvim-mini/mini.nvim",
+  "https://github.com/nvim-mini/mini.nvim",
   version = false,
   config = function()
     -- https://nvim-mini.org/mini.nvim/readmes/mini-ai.html
