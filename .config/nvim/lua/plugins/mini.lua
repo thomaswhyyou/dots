@@ -6,6 +6,9 @@ return {
     -- https://nvim-mini.org/mini.nvim/readmes/mini-ai.html
     require("mini.ai").setup()
 
+    -- https://nvim-mini.org/mini.nvim/readmes/mini-align.html
+    require("mini.align").setup()
+
     -- https://nvim-mini.org/mini.nvim/readmes/mini-surround.html
     require("mini.surround").setup()
 

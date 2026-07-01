@@ -175,26 +175,26 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.spell = true
   end,
 })
--- -- Turn on cursorline and relativenumber in the currently focused buffer only.
--- -- Restrict to real file buffers (buftype == ""), which excludes special windows
--- -- like NvimTree, help, quickfix, and terminals.
--- local active_buffer_group = augroup("active_buffer")
--- vim.api.nvim_create_autocmd({ "VimEnter", "WinEnter" }, {
---   group = active_buffer_group,
---   callback = function()
---     if vim.bo.buftype ~= "" then return end
---     vim.opt_local.cursorline = true
---     vim.opt_local.relativenumber = true
---   end,
--- })
--- vim.api.nvim_create_autocmd("WinLeave", {
---   group = active_buffer_group,
---   callback = function()
---     if vim.bo.buftype ~= "" then return end
---     vim.opt_local.cursorline = false
---     vim.opt_local.relativenumber = false
---   end,
--- })
+-- Turn on cursorline and relativenumber in the currently focused buffer only.
+-- Restrict to real file buffers (buftype == ""), which excludes special windows
+-- like NvimTree, help, quickfix, and terminals.
+local active_buffer_group = augroup("active_buffer")
+vim.api.nvim_create_autocmd({ "VimEnter", "WinEnter" }, {
+  group = active_buffer_group,
+  callback = function()
+    if vim.bo.buftype ~= "" then return end
+    vim.opt_local.cursorline = true
+    vim.opt_local.relativenumber = true
+  end,
+})
+vim.api.nvim_create_autocmd("WinLeave", {
+  group = active_buffer_group,
+  callback = function()
+    if vim.bo.buftype ~= "" then return end
+    vim.opt_local.cursorline = false
+    vim.opt_local.relativenumber = false
+  end,
+})
 
 --- PACKAGES ---
 -- TODO: Migrate to the native package manager.
@@ -246,6 +246,7 @@ require("lazy").setup({
 --- Todos ---
 -- tab / s+tab for navigation
 -- mini.git (for blame?)
+-- git browse
 -- fzf configs, toggle between grug-far
 -- vim.o.autocomplete
 -- finish porting over the old nvim configs
