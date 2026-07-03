@@ -17,6 +17,12 @@ return {
           open_in_browser = "o",
         },
       })
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "BlameViewOpened",
+        callback = function()
+          vim.opt_local.signcolumn = "no"
+        end,
+      })
       vim.keymap.set("n", "<leader>gb", "<cmd>BlameToggle<cr>", { desc = "Toggle git blame" })
     end,
   },
