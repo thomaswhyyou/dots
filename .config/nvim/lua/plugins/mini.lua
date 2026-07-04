@@ -9,9 +9,6 @@ return {
     -- https://nvim-mini.org/mini.nvim/readmes/mini-align.html
     require("mini.align").setup()
 
-    -- https://nvim-mini.org/mini.nvim/readmes/mini-surround.html
-    require("mini.surround").setup()
-
     -- https://nvim-mini.org/mini.nvim/readmes/mini-pairs.html
     require("mini.pairs").setup({
       -- Only auto-pair at end-of-line. `neigh_pattern` matches the chars around
@@ -27,15 +24,21 @@ return {
       },
     })
 
+    -- https://nvim-mini.org/mini.nvim/readmes/mini-splitjoin.html
+    require("mini.splitjoin").setup()
+
+    -- https://nvim-mini.org/mini.nvim/readmes/mini-surround.html
+    require("mini.surround").setup()
+
+    -- https://nvim-mini.org/mini.nvim/readmes/mini-bracketed.html
+    require("mini.bracketed").setup()
+
     -- https://nvim-mini.org/mini.nvim/readmes/mini-bufremove.html
     require("mini.bufremove").setup()
     vim.keymap.set("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
     vim.keymap.set("n", "<leader>bd", function()
       require("mini.bufremove").delete()
     end, { desc = "Delete Buffer" })
-
-    -- https://nvim-mini.org/mini.nvim/readmes/mini-bracketed.html
-    require("mini.bracketed").setup()
 
     -- https://nvim-mini.org/mini.nvim/readmes/mini-git.html
     require("mini.git").setup()
@@ -101,11 +104,37 @@ return {
 }
 
 -- No-go:
+-- mini.comment: x
+-- mini.completion: blink
+-- mini.keymap: ?
+-- mini.move: x
+-- mini.operators: ?
+-- mini.snippets: blink
+-- mini.basics: x
 -- mini.clue: whick-key
 -- mini.cmdline: blink
+-- mini.deps: lazy
+-- mini.extra: ?
+-- mini.files: oil
+-- mini.input: ?
 -- mini.deps: vim.pack
 -- mini.jump: flash
 -- mini.jump2d: flash
+-- mini.misc: ?
 -- mini.pick: fzf-lua
+-- mini.sessions: tmux
+-- mini.visits: ?
+-- mini.animate: x
+-- mini.base16: ?
+-- mini.colors: .
+-- mini.cursorword: x
+-- mini.hues: ?
+-- mini.icons: .
+-- mini.map: x
+-- mini.starter: x
 -- mini.statusline: lualine
 -- mini.tabline: lualine
+-- mini.trailspace: conform
+-- mini.doc: ?
+-- mini.fuzzy: ?
+-- mini.test: ?

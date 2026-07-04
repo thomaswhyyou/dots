@@ -235,19 +235,15 @@ require("lazy").setup({
 -- https://github.com/mhinz/vim-galore
 
 --- Examples ---
--- https://github.com/nvim-lua/kickstart.nvim
 -- https://github.com/CosmicNvim/CosmicNvim
 -- https://github.com/NormalNvim/NormalNvim
 -- https://github.com/AstroNvim/AstroNvim
 -- https://github.com/LunarVim/LunarVim
--- https://github.com/jellydn/tiny-nvim
 
 --- Todos ---
 -- tab / s+tab for navigation
 -- mini.git (for blame?)
--- git browse
 -- fzf configs, toggle between grug-far
 -- vim.o.autocomplete
--- finish porting over the old nvim configs
 -- https://github.com/cursortab/cursortab.nvim
 -- https://github.com/zuqini/zpack.nvim
