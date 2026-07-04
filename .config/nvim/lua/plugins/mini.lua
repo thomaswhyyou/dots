@@ -29,6 +29,10 @@ return {
 
     -- https://nvim-mini.org/mini.nvim/readmes/mini-bufremove.html
     require("mini.bufremove").setup()
+    vim.keymap.set("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
+    vim.keymap.set("n", "<leader>bd", function()
+      require("mini.bufremove").delete()
+    end, { desc = "Delete Buffer" })
 
     -- https://nvim-mini.org/mini.nvim/readmes/mini-bracketed.html
     require("mini.bracketed").setup()
