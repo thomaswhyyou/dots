@@ -69,5 +69,11 @@ return {
     -- <C-_> (0x1F) in legacy ones, so bind both to cover either encoding.
     vim.keymap.set({ "n", "t" }, "<C-/>", s.terminal.toggle, { noremap = true, silent = true })
     vim.keymap.set({ "n", "t" }, "<C-_>", s.terminal.toggle, { noremap = true, silent = true })
+
+    -- Git browse permalink (open in browser / copy URL)
+    vim.keymap.set({ "n", "x" }, "<leader>gB", function() s.gitbrowse({ what = "permalink" }) end, { desc = "Git Permalink (open)" })
+    vim.keymap.set({ "n", "x" }, "<leader>gY", function()
+      s.gitbrowse({ what = "permalink", open = function(url) vim.fn.setreg("+", url) end, notify = false })
+    end, { desc = "Git Permalink (copy)" })
   end,
 }
