@@ -3,10 +3,25 @@ return {
   -- stylua: ignore
   keys = {
     { "<leader>p", function() require("fzf-lua").files() end, desc = "Fzf Files" },
-    { "<leader>/", function() require("fzf-lua").grep() end, desc = "Fzf Grep" },
+    { "<leader>/", function() require("fzf-lua").grep() end, desc = "Ff Grep" },
+    -- {
+    --   "gO",
+    --   function()
+    --     require("fzf-lua").lsp_document_symbols()
+    --   end,
+    --   desc = "fzf document symbols",
+    -- },
   },
   config = function()
     require("fzf-lua").setup({
+      -- Rebind multi-select from tab/shift-tab to ctrl-space
+      keymap = {
+        fzf = {
+          ["ctrl-space"] = "toggle", -- toggle selection without moving
+          ["tab"] = "down", -- tab now just moves down
+          ["shift-tab"] = "up", -- shift-tab now just moves up
+        },
+      },
       winopts = {
         height = 0.90,
         width = vim.o.columns < 240 and 0.8 or 0.4,
@@ -68,7 +83,7 @@ return {
   end,
 }
 
--- search
+-- Search
 -- { '<leader>s"', function() Snacks.picker.registers() end, desc = "Registers" },
 -- { '<leader>s/', function() Snacks.picker.search_history() end, desc = "Search History" },
 -- { "<leader>sa", function() Snacks.picker.autocmds() end, desc = "Autocmds" },
