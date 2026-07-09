@@ -12,11 +12,6 @@ alias ..4='cd ../../../../'                 # Go back 4 directory levels
 alias ..5='cd ../../../../../'              # Go back 5 directory levels
 alias ..6='cd ../../../../../../'           # Go back 6 directory levels
 
-# TODO
-# https://omarelhawary.me/blog/faster-directory-navigation-with-fzf/
-
-# --- Package managers
-
 # homebrew (MUST come first for command checks below if installed via homebrew)
 if [[ -f /opt/homebrew/bin/brew ]]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -27,7 +22,7 @@ if [[ -f /opt/homebrew/bin/mise ]]; then
   eval "$(mise activate zsh)"
 fi
 
-# --- Packages
+# ---
 
 # neovim
 if command -v nvim >/dev/null 2>&1; then
