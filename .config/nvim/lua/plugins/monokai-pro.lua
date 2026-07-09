@@ -47,7 +47,9 @@ return {
         LuaLineDiffDelete = { link = "DiffRemoved" },
         -- flash: use Hop's bold magenta for the jump label
         FlashLabel = { fg = "#ff007c", bg = c.editor.background, bold = true },
-        FlashCurrent = { link = "CurSearch" }
+        FlashCurrent = { link = "CurSearch" },
+        -- multicursor:
+        MultiCursorSign = { fg = c.base.dimmed3, bg = c.editor.background }
       }
     end,
   },
