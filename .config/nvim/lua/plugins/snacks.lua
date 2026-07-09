@@ -42,13 +42,19 @@ return {
     })
 
     -- Lazygit
-    vim.keymap.set("n", "<leader>gg", function() s.lazygit() end, { desc = "Lazygit" })
+    vim.keymap.set("n", "<leader>gg", function()
+      s.lazygit()
+    end, { desc = "Lazygit" })
 
     -- Zen toggle
-    vim.keymap.set("n", "<leader>uz", function() s.zen() end, { desc = "Toggle Zen Mode" })
+    vim.keymap.set("n", "<leader>uz", function()
+      s.zen()
+    end, { desc = "Toggle Zen Mode" })
 
     -- Diagnostics toggle
-    vim.keymap.set("n", "<leader>ud", function() s.toggle.diagnostics():toggle() end, { desc = "Toggle Diagnostics" })
+    vim.keymap.set("n", "<leader>ud", function()
+      s.toggle.diagnostics():toggle()
+    end, { desc = "Toggle Diagnostics" })
 
     -- Indent guide toggle (mini.indentscope)
     s.toggle
@@ -71,9 +77,17 @@ return {
     vim.keymap.set({ "n", "t" }, "<C-_>", s.terminal.toggle, { noremap = true, silent = true })
 
     -- Git browse permalink (open in browser / copy URL)
-    vim.keymap.set({ "n", "x" }, "<leader>gB", function() s.gitbrowse({ what = "permalink" }) end, { desc = "Git Permalink (open)" })
+    vim.keymap.set({ "n", "x" }, "<leader>gB", function()
+      s.gitbrowse({ what = "permalink" })
+    end, { desc = "Git Permalink (open)" })
     vim.keymap.set({ "n", "x" }, "<leader>gY", function()
-      s.gitbrowse({ what = "permalink", open = function(url) vim.fn.setreg("+", url) end, notify = false })
+      s.gitbrowse({
+        what = "permalink",
+        open = function(url)
+          vim.fn.setreg("+", url)
+        end,
+        notify = false,
+      })
     end, { desc = "Git Permalink (copy)" })
   end,
 }
