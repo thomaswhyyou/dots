@@ -24,9 +24,5 @@ return {
         },
       },
     })
-    -- Use Hop's bold magenta for the jump label
-    vim.api.nvim_set_hl(0, "FlashLabel", { fg = "#ff007c", bold = true })
-    -- Match the current search match color
-    vim.api.nvim_set_hl(0, "FlashCurrent", { link = "CurSearch" })
   end,
 }

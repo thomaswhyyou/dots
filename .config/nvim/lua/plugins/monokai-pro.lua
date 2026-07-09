@@ -45,6 +45,9 @@ return {
         LuaLineDiffAdd = { link = "DiffAdded" },
         LuaLineDiffChange = { link = "DiffChanged" },
         LuaLineDiffDelete = { link = "DiffRemoved" },
+        -- flash: use Hop's bold magenta for the jump label
+        FlashLabel = { fg = "#ff007c", bg = c.editor.background, bold = true },
+        FlashCurrent = { link = "CurSearch" }
       }
     end,
   },
