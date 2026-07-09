@@ -95,7 +95,7 @@ return {
         hack = { pattern = "%f[%w]()HACK()%f[%W]", group = "MiniHipatternsXXX" },
         todo = { pattern = "%f[%w]()TODO()%f[%W]", group = "MiniHipatternsXXX" },
         note = { pattern = "%f[%w]()NOTE()%f[%W]", group = "MiniHipatternsXXX" },
-        triple_dash = { pattern = "^()%s*%-%-%-.*()$", group = "MiniHipatternsDDD" },
+        triple_dash = { pattern = "^()%W*%-%-%-.*()$", group = "MiniHipatternsDDD" },
       },
     })
     vim.api.nvim_set_hl(0, "MiniHipatternsXXX", { fg = "#FFFFFF", bold = true })
