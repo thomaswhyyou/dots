@@ -43,7 +43,19 @@ return {
           },
         },
         lualine_c = {
-          { "filetype", icon_only = true, padding = { left = 1, right = 0 } },
+          {
+            -- Current working directory name, prefixed onto the filename.
+            function()
+              return vim.fn.fnamemodify(vim.fn.getcwd(), ":t") .. "/"
+            end,
+            color = "Directory",
+            padding = { left = 1, right = 0 },
+            cond = function()
+              -- Only when the file is inside the cwd; otherwise filename
+              -- already shows an absolute path.
+              return vim.startswith(vim.api.nvim_buf_get_name(0), vim.fn.getcwd() .. "/")
+            end,
+          },
           { "filename", path = 1, padding = { left = 0, right = 1 } },
           { "diff" },
         },
