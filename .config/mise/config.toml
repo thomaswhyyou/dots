@@ -21,4 +21,4 @@ elixir = "latest"
 # js / node
 node = "latest"
 pnpm = "latest"
-"npm:@typescript/native-preview" = "latest"
+"npm:typescript" = "latest"
