@@ -103,7 +103,7 @@ return {
   end,
 }
 
--- No-go:
+---
 -- mini.comment: x
 -- mini.completion: blink
 -- mini.keymap: ?
