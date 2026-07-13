@@ -14,6 +14,7 @@ vim.opt.termguicolors = true      -- 24-bit RGB colors in the TUI (default: fals
 vim.opt.showmode = false          -- Don't show mode in cmdline; statusline plugins handle it (default: true)
 vim.opt.laststatus = 3            -- Enable global statusline at the bottom (default: 2)
 vim.opt.cursorline = true         -- Highlight the current cursor line with CursorLine (default: false)
+vim.opt.cursorlineopt = "number"  -- Highlight only the line number, not the entire line (default: "both")
 vim.opt.cmdheight = 0             -- Hide command line when idle to remove the bottom gap (default: 1)
 vim.opt.pumborder = "rounded"     -- The border style of popupmenu windows (default: "")
 vim.opt.winborder = "rounded"     -- The border style of floating windows (default: "")
@@ -237,7 +238,6 @@ require("lazy").setup({
 -- https://github.com/LunarVim/LunarVim
 
 --- Todos ---
--- fzf configs
 -- tab / s+tab for navigation
 -- sql/http interface
 -- vim.o.autocomplete
