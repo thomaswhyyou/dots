@@ -29,15 +29,15 @@ return {
     end, { desc = "Sidekick Select" })
 
     vim.keymap.set({ "x", "n" }, "<leader>at", function()
-      cli.send({ msg = "{this}" })
+      cli.send({ msg = "{this}", filter = { installed = true } })
     end, { desc = "Send This" })
 
     vim.keymap.set("n", "<leader>af", function()
-      cli.send({ msg = "{file}" })
+      cli.send({ msg = "{file}", filter = { installed = true } })
     end, { desc = "Send File" })
 
     vim.keymap.set("x", "<leader>av", function()
-      cli.send({ msg = "{selection}" })
+      cli.send({ msg = "{selection}", filter = { installed = true } })
     end, { desc = "Send Visual Selection" })
 
     vim.keymap.set({ "n", "x" }, "<leader>ap", function()
