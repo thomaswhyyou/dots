@@ -68,7 +68,10 @@ return {
     -- Fzf-flavored versions of the default LSP keymaps
     -- (grn stays default since rename is an input prompt, not a list).
     -- LSP pickers open with a visible preview
-    local lsp_opts = { winopts = { width = 0.65, preview = { hidden = false } } }
+    local lsp_opts = {
+      winopts = { width = vim.o.columns < 240 and 0.85 or 0.65,
+      preview = { hidden = false } }
+    }
     vim.keymap.set("n", "gO", function() fzf.lsp_document_symbols(lsp_opts) end, { desc = "Fzf Document Symbols" })
     vim.keymap.set({ "n", "x" }, "gra", function() fzf.lsp_code_actions(lsp_opts) end, { desc = "Fzf Code Actions" })
     vim.keymap.set("n", "grr", function() fzf.lsp_references(lsp_opts) end, { desc = "Fzf References" })
