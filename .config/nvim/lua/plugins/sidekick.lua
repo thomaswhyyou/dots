@@ -17,37 +17,36 @@ return {
         },
       },
     })
-  end,
-  keys = {
-    {
-      "<c-.>",
-      function() require("sidekick.cli").toggle({ filter = { installed = true } }) end,
-      desc = "Sidekick Toggle",
-    },
-    {
-      "<leader>as",
-      function()
-        require("sidekick.cli").select({ filter = { installed = true } })
-      end,
-      desc = "Sidekick Select",
-    },
-    -- {
-    --   "<leader>aa",
-    --   function() require("sidekick.cli").toggle({ filter = { installed = true } }) end,
-    --   desc = "Sidekick Toggle CLI",
-    -- },
-    { "<leader>at", function() require("sidekick.cli").send({ msg = "{this}" }) end, mode = { "x", "n" }, desc = "Send This" },
-    { "<leader>af", function() require("sidekick.cli").send({ msg = "{file}" }) end, desc = "Send File" },
-    { "<leader>av", function() require("sidekick.cli").send({ msg = "{selection}" }) end, mode = { "x" }, desc = "Send Visual Selection" },
-    { "<leader>ap", function() require("sidekick.cli").prompt() end, mode = { "n", "x" }, desc = "Sidekick Select Prompt" },
+
+    local cli = require("sidekick.cli")
+
+    vim.keymap.set("n", "<c-.>", function()
+      cli.toggle({ filter = { installed = true } })
+    end, { desc = "Sidekick Toggle" })
+
+    vim.keymap.set("n", "<leader>as", function()
+      cli.select({ filter = { installed = true } })
+    end, { desc = "Sidekick Select" })
+
+    vim.keymap.set({ "x", "n" }, "<leader>at", function()
+      cli.send({ msg = "{this}" })
+    end, { desc = "Send This" })
+
+    vim.keymap.set("n", "<leader>af", function()
+      cli.send({ msg = "{file}" })
+    end, { desc = "Send File" })
+
+    vim.keymap.set("x", "<leader>av", function()
+      cli.send({ msg = "{selection}" })
+    end, { desc = "Send Visual Selection" })
+
+    vim.keymap.set({ "n", "x" }, "<leader>ap", function()
+      cli.prompt()
+    end, { desc = "Sidekick Select Prompt" })
 
     -- Example of a keybinding to open Claude directly
-    {
-      "<leader>ac",
-      function()
-        require("sidekick.cli").toggle({ name = "claude", focus = true })
-      end,
-      desc = "Sidekick Toggle Claude",
-    },
-  },
+    vim.keymap.set("n", "<leader>ac", function()
+      require("sidekick.cli").toggle({ name = "claude", focus = true })
+    end, { desc = "Sidekick Toggle Claude" })
+  end,
 }
