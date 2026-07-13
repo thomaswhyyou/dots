@@ -139,8 +139,6 @@ vim.api.nvim_create_autocmd("FileType", {
     "checkhealth",
     "help",
     "qf",
-    -- "lspinfo",
-    -- "notify",
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
