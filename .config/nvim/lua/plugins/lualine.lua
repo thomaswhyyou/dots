@@ -48,7 +48,10 @@ return {
             function()
               return vim.fn.fnamemodify(vim.fn.getcwd(), ":t") .. "/"
             end,
-            color = "Directory",
+            color = function()
+              local hl = vim.api.nvim_get_hl(0, { name = "Directory", link = false })
+              return { fg = hl.fg and string.format("#%06x", hl.fg), gui = "bold" }
+            end,
             padding = { left = 1, right = 0 },
             cond = function()
               -- Only when the file is inside the cwd; otherwise filename
