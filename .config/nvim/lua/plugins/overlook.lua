@@ -12,7 +12,6 @@ return {
     })
 
     local api = require("overlook.api")
-    vim.keymap.set("n", "gD", api.peek_definition, { desc = "Peek definition" })
     vim.keymap.set("n", "gpd", api.peek_definition, { desc = "Peek definition" })
     vim.keymap.set("n", "gpu", api.restore_popup, { desc = "Restore last popup" })
     vim.keymap.set("n", "gpU", api.restore_all_popups, { desc = "Restore all popups" })
