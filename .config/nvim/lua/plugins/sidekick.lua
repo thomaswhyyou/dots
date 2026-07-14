@@ -24,11 +24,15 @@ return {
       cli.toggle({ filter = { installed = true } })
     end, { desc = "Sidekick Toggle" })
 
-    vim.keymap.set("n", "<leader>as", function()
-      cli.select({ filter = { installed = true } })
+    vim.keymap.set("n", "<leader>aa", function()
+      cli.toggle({ filter = { installed = true, focus = true } })
     end, { desc = "Sidekick Select" })
 
-    vim.keymap.set({ "x", "n" }, "<leader>at", function()
+    vim.keymap.set("n", "<leader>ac", function()
+      cli.toggle({ name = "claude", focus = true })
+    end, { desc = "Sidekick Toggle Claude" })
+
+    vim.keymap.set({ "n", "x" }, "<leader>at", function()
       cli.send({ msg = "{this}", filter = { installed = true } })
     end, { desc = "Send This" })
 
@@ -43,10 +47,5 @@ return {
     vim.keymap.set({ "n", "x" }, "<leader>ap", function()
       cli.prompt()
     end, { desc = "Sidekick Select Prompt" })
-
-    -- Example of a keybinding to open Claude directly
-    vim.keymap.set("n", "<leader>ac", function()
-      require("sidekick.cli").toggle({ name = "claude", focus = true })
-    end, { desc = "Sidekick Toggle Claude" })
   end,
 }
