@@ -28,7 +28,24 @@ return {
     require("mini.splitjoin").setup()
 
     -- https://nvim-mini.org/mini.nvim/readmes/mini-surround.html
-    require("mini.surround").setup()
+    -- nvim-surround-style mappings (:h MiniSurround-vim-surround-config)
+    require("mini.surround").setup({
+      mappings = {
+        add = "ys",
+        delete = "ds",
+        replace = "cs",
+        find = "",
+        find_left = "",
+        highlight = "",
+        update_n_lines = "",
+        suffix_last = "",
+        suffix_next = "",
+      },
+      search_method = "cover_or_next",
+    })
+    -- mini.surround also maps `add` ("ys") in visual mode, which would make
+    -- visual `y` (yank) wait on timeoutlen, so drop that.
+    vim.keymap.del("x", "ys")
 
     -- https://nvim-mini.org/mini.nvim/readmes/mini-bracketed.html
     require("mini.bracketed").setup()
