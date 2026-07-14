@@ -1,22 +1,22 @@
 return {
   "https://github.com/Bekaboo/dropbar.nvim",
   config = function()
-    local dropbar = require("dropbar")
-    local sources = require("dropbar.sources")
+    -- Capture before setup() to avoid infinite recursion, setup() merges
+    -- overrides into this same table.
+    local default_enable = require("dropbar.configs").opts.bar.enable
 
-    dropbar.setup({
+    require("dropbar").setup({
       icons = {
-        kinds = {
-          dir_icon = "",
-        },
+        kinds = { dir_icon = "" },
       },
       bar = {
-        sources = function(buf, _)
+        enable = function(buf, win, info)
           if vim.bo[buf].buftype == "terminal" then
-            return { sources.terminal }
+            return false
           end
-          return { sources.path }
+          return default_enable(buf, win, info)
         end,
+        sources = { require("dropbar.sources").path },
       },
     })
 
