@@ -34,7 +34,7 @@ return {
         -- Make Search highlights brighter
         Search = { bg = c.base.dimmed3, fg = c.base.white },
         -- Winbar (dropbar) text: bright in the focused window, dimmed otherwise
-        WinBar = { fg = c.base.text, bg = c.editor.background },
+        WinBar = { fg = c.base.dimmed1, bg = c.editor.background },
         WinBarNC = { fg = c.base.dimmed3, bg = c.editor.background },
 
         -- incline: window titles

@@ -9,6 +9,10 @@ return {
       icons = {
         kinds = { dir_icon = "" },
       },
+      sources = {
+        lsp = { max_depth = 1 },
+        treesitter = { max_depth = 1 },
+      },
       bar = {
         enable = function(buf, win, info)
           if vim.bo[buf].buftype == "terminal" then
@@ -16,7 +20,7 @@ return {
           end
           return default_enable(buf, win, info)
         end,
-        sources = { require("dropbar.sources").path },
+        -- sources = { require("dropbar.sources").path },
       },
     })
 
