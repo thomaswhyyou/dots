@@ -88,6 +88,25 @@ vim.lsp.document_color.enable(false)
 for i = 1, 9 do
   vim.keymap.set("n", "<A-" .. i .. ">", i .. "gt", { desc = "Go to tab " .. i })
 end
+-- LSP go-to-definition with tagstack-based back/forward navigation.
+vim.keymap.set("n", "gD", function()
+  -- Bind tagstack navigation in a buffer: <S-Tab> pops back, <Tab> re-follows.
+  local function set_tag_nav_maps(buf)
+    vim.keymap.set("n", "<S-Tab>", "<C-T>", { silent = true, buffer = buf })
+    vim.keymap.set("n", "<Tab>", "<CMD>tag<CR>", { buffer = buf })
+  end
+  -- Bind in the origin buffer (so the maps still work after popping back here)
+  set_tag_nav_maps(vim.api.nvim_get_current_buf())
+  -- And in the destination buffer (once the definition jump lands there)
+  vim.api.nvim_create_autocmd("BufEnter", {
+    group = vim.api.nvim_create_augroup("go-to-definition-jumplist", { clear = true }),
+    once = true,
+    callback = function(args)
+      set_tag_nav_maps(args.buf)
+    end,
+  })
+  vim.lsp.buf.definition()
+end, { desc = "Go to definition (tagstack S-Tab/Tab)" })
 
 --- AUTOCMDS ---
 
@@ -236,8 +255,6 @@ require("lazy").setup({
 -- https://github.com/LunarVim/LunarVim
 
 --- Todos ---
--- tab / s+tab for navigation
--- sql/http interface
 -- vim.o.autocomplete
 -- https://github.com/cursortab/cursortab.nvim
 -- https://github.com/zuqini/zpack.nvim
