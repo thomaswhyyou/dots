@@ -16,7 +16,7 @@ return {
         ["<CR>"] = "actions.select",
         -- Custom:
         ["q"] = { "actions.close", mode = "n" },
-        ["yy"] = {
+        ["yp"] = {
           -- https://www.reddit.com/r/neovim/comments/1czp9zr/how_to_copy_file_path_to_clipboard_in_oilnvim/
           desc = "Copy filepath to system clipboard",
           callback = function()
