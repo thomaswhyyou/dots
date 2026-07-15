@@ -3,11 +3,13 @@ return {
   config = function()
     require("overlook").setup({
       ui = {
-        title_pos = "left", -- added in the fork
+        title_pos = "left",
         size_ratio = 1,
         row_offset = 0,
         col_offset = 0,
         min_width = 120,
+        width_decrement = 0, -- keep every stacked popup the same width
+        stack_col_offset = -1, -- cancel the 1-col border inset so left borders align
       },
     })
 
