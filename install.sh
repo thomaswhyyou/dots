@@ -38,11 +38,11 @@ jj
 "
 for dir in $CONFIGS; do
   echo "Creating a symlink at ~/.config/$dir"
-  ln -sfn ~/dots/.config/$dir ~/.config/$dir
+  ln -sfn ~/dots/config/$dir ~/.config/$dir
 done
 
 # Atuin keeps (re)creating a directory with the default config.
-ln -sf ~/dots/.config/atuin/config.toml ~/.config/atuin/config.toml
+ln -sf ~/dots/config/atuin/config.toml ~/.config/atuin/config.toml
 
 ZSHRC="$HOME/.zshrc"
 echo "Setting up $ZSHRC"
