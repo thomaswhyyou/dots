@@ -9,12 +9,6 @@ return {
         tools = {
           claude = { cmd = { "claude", "--dangerously-skip-permissions" } },
         },
-        win = {
-          split = {
-            width = 100,
-            height = 0,
-          },
-        },
       },
     })
 
@@ -31,6 +25,8 @@ return {
     vim.keymap.set("n", "<leader>ac", function()
       cli.toggle({ name = "claude", focus = true })
     end, { desc = "Sidekick Toggle Claude" })
+
+    --
 
     vim.keymap.set({ "n", "x" }, "<leader>at", function()
       cli.send({ msg = "{this}", filter = { installed = true } })
