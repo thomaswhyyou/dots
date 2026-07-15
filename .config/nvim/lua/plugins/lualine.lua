@@ -6,6 +6,9 @@ return {
     local theme = require("lualine.themes.auto")
     -- Constant plain text/background color (don't follow the per-mode theme).
     local normal_b = { fg = theme.normal.c.fg, bg = theme.normal.b.bg }
+    -- Foreground color of the Directory highlight (nil if unset).
+    local directory_hl = vim.api.nvim_get_hl(0, { name = "Directory", link = false })
+    local directory_fg = directory_hl.fg and string.format("#%06x", directory_hl.fg)
 
     require("lualine").setup({
       options = {
@@ -48,10 +51,7 @@ return {
             function()
               return vim.fn.fnamemodify(vim.fn.getcwd(), ":t") .. "/"
             end,
-            color = function()
-              local hl = vim.api.nvim_get_hl(0, { name = "Directory", link = false })
-              return { fg = hl.fg and string.format("#%06x", hl.fg), gui = "bold" }
-            end,
+            color = { fg = directory_fg, gui = "bold" },
             padding = { left = 1, right = 0 },
             cond = function()
               -- Only when the file is inside the cwd; otherwise filename
@@ -59,7 +59,7 @@ return {
               return vim.startswith(vim.api.nvim_buf_get_name(0), vim.fn.getcwd() .. "/")
             end,
           },
-          { "filename", path = 1, padding = { left = 0, right = 1 } },
+          { "filename", path = 1, padding = { left = 1, right = 1 } },
           { "diff" },
         },
         -- Right hand side
@@ -69,7 +69,11 @@ return {
             sources = { "nvim_diagnostic" },
             symbols = { error = " ", warn = " ", info = " ", hint = "󰌵 " },
           },
-          { "lsp_status", icon = "" },
+          {
+            "lsp_status",
+            icon = "",
+            color = { fg = directory_fg, gui = "bold" },
+          },
         },
         lualine_y = {
           -- Current line:column total lines, e.g. 120:8 350

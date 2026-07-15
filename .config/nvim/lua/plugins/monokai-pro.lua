@@ -36,6 +36,8 @@ return {
         -- Winbar (dropbar) text: bright in the focused window, dimmed otherwise
         WinBar = { fg = c.base.dimmed1, bg = c.editor.background },
         WinBarNC = { fg = c.base.dimmed3, bg = c.editor.background },
+        -- Health check section delimiters
+        healthSectionDelim = { link = "CursorLine" },
 
         -- incline: window titles
         InclineNormal = { fg = c.base.yellow, bg = c.base.dimmed5, bold = true },
