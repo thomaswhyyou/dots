@@ -43,8 +43,19 @@ return {
         cwd_prompt = false,
         -- stylua: ignore
         actions = {
+          ["tab"] = function(_, _) fzf.tagstack() end,
+          ["shift-tab"] = function(_, _) fzf.builtin() end,
+        },
+      },
+      tagstack = {
+        -- stylua: ignore
+        actions = {
           ["tab"] = function(_, _) fzf.files() end,
           ["shift-tab"] = function(_, _) fzf.builtin() end,
+          -- Clear the current window's tag stack (picker closes after)
+          ["ctrl-d"] = function(_, _)
+            vim.fn.settagstack(vim.api.nvim_get_current_win(), { items = {} }, "r")
+          end,
         },
       },
       builtin = {
