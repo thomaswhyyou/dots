@@ -12,6 +12,12 @@ return {
       end,
     }
     vim.g["test#strategy"] = pcall(require, "snacks") and "snacks" or "neovim"
+
+    vim.keymap.set("n", "<leader>tn", "<cmd>TestNearest<CR>", { desc = "Test nearest" })
+    vim.keymap.set("n", "<leader>tf", "<cmd>TestFile<CR>", { desc = "Test file" })
+    vim.keymap.set("n", "<leader>ts", "<cmd>TestSuite<CR>", { desc = "Test suite" })
+    vim.keymap.set("n", "<leader>tl", "<cmd>TestLast<CR>", { desc = "Test last" })
+    vim.keymap.set("n", "<leader>tg", "<cmd>TestVisit<CR>", { desc = "Go to last test" })
   end,
   cmd = {
     "TestNearest",
@@ -19,12 +25,5 @@ return {
     "TestSuite",
     "TestLast",
     "TestVisit",
-  },
-  keys = {
-    { "<leader>tn", "<cmd>TestNearest<CR>" },
-    { "<leader>tf", "<cmd>TestFile<CR>" },
-    { "<leader>ts", "<cmd>TestSuite<CR>" },
-    { "<leader>tl", "<cmd>TestLast<CR>" },
-    { "<leader>tg", "<cmd>TestVisit<CR>" },
   },
 }
