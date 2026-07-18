@@ -1,6 +1,4 @@
-# theme = Xcode Dark
 theme = Xcode Dark hc
-# theme = Dracula
 
 font-family = Berkeley Mono
 font-size = 12
@@ -8,7 +6,6 @@ font-feature = -calt, -liga, -dlig
 
 cursor-color = 05f900
 cursor-text = 003541
-# cursor-style = underline
 custom-shader = shaders/cursor_sweep.glsl
 shell-integration-features = no-cursor
 
