@@ -1,6 +1,3 @@
-[settings]
-dotfiles.root = "~/.dots"
-
 [bootstrap.packages]
 # Terminal
 "brew:git" = "latest"
@@ -29,6 +26,9 @@ dotfiles.root = "~/.dots"
 "brew-cask:rectangle" = "latest"
 "brew-cask:onlyoffice" = "latest"
 "brew-cask:itsycal" = "latest"
+
+[bootstrap.repos]
+"~/dots" = { url = "https://github.com/thomaswhyyou/dots.git" }
 
 [dotfiles]
 "~/.gitconfig" = "~/dots/.gitconfig"

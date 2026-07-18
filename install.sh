@@ -6,11 +6,7 @@ put() {
   echo ""; echo "$1"
 }
 
-# Mise (https://mise.jdx.dev/)
-if ! command -v mise &> /dev/null; then
-  echo "Mise is not installed. Installing now.."
-  /bin/bash -c "$(curl https://mise.run | sh)"
-fi
+# --- Zsh + Zim
 
 # Zim (https://github.com/zimfw/zimfw)
 if [ ! -f "${ZDOTDIR:-$HOME}/.zim/init.zsh" ]; then
@@ -26,11 +22,26 @@ if touch $ZSHRC && ! grep -Fxq "source ~/.profile" "$ZSHRC"; then
   echo "source ~/.profile" >> "$ZSHRC"
 fi
 
-echo "Creating a symlink at ~/.config/mise"
-ln -sfn ~/dots/config/mise ~/.config/mise
+# --- Mise
+
+# Mise (https://mise.jdx.dev/)
+if ! command -v mise &> /dev/null; then
+  echo "Mise is not installed. Installing now.."
+  /bin/bash -c "$(curl https://mise.run | sh)"
+fi
+
+MISE_CONFIG="$HOME/.config/mise/config.toml"
+if [ ! -f "$MISE_CONFIG" ]; then
+  put "Fetching mise config.."
+  mkdir -p "$(dirname "$MISE_CONFIG")"
+  curl -fsSL https://raw.githubusercontent.com/thomaswhyyou/dots/main/config/mise/config.toml -o "$MISE_CONFIG"
+fi
 
 put "Install system packages:"
 mise bootstrap packages apply -y
+
+put "Install config repos:"
+mise bootstrap repos apply -y
 
 put "Install config files:"
 mise bootstrap dotfiles apply -y --force
