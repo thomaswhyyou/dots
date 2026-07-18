@@ -75,7 +75,7 @@ if mise bootstrap packages status --json 2>/dev/null \
   done
 fi
 
-# Shell history sync
+# Sync shell history
 if command -v atuin >/dev/null 2>&1; then
   section "Syncing shell history (atuin):"
   atuin sync
