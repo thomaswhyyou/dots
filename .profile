@@ -17,8 +17,6 @@ if [[ -f /opt/homebrew/bin/mise ]]; then
   eval "$(mise activate zsh)"
 fi
 
-# ---
-
 # neovim
 if command -v nvim >/dev/null 2>&1; then
   alias vim='nvim'
