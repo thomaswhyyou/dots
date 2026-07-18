@@ -9,6 +9,11 @@ return {
         tools = {
           claude = { cmd = { "claude", "--dangerously-skip-permissions" } },
         },
+        win = {
+          split = {
+            width = 100,
+          },
+        },
       },
     })
 

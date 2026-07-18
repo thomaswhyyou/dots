@@ -89,6 +89,7 @@ for i = 1, 9 do
   vim.keymap.set("n", "<A-" .. i .. ">", i .. "gt", { desc = "Go to tab " .. i })
 end
 -- LSP go-to-definition with tagstack-based back/forward navigation.
+-- https://www.reddit.com/r/neovim/comments/y9czdl/navigate_back_to_function_from_where_we_did_goto/
 vim.keymap.set("n", "gD", function()
   -- Bind tagstack navigation in a buffer: <S-Tab> pops back, <Tab> re-follows.
   local function set_tag_nav_maps(buf)
