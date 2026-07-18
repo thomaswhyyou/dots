@@ -3,20 +3,15 @@
 
 [core]
   editor = nvim
-
 [user]
   name = Thomas Yu
   email = hey@thomassyy.com
-
 [push]
   default = current
-
 [pull]
   default = current
-
 [branch]
   autosetuprebase = always
-
 [apply]
   whitespace = nowarn
 
@@ -26,7 +21,6 @@
 ;   old = 160         # Red
 ;   new = 34          # Green
 ;   plain = white
-;
 ; [color "status"]
 ;   added = 34        # Green
 ;   changed = yellow
@@ -94,9 +88,3 @@
   filetrail = git log --follow -p -w
   mergetrail = log --ancestry-path --merges
   unmerged = diff --name-only --diff-filter=U
-
-; [filter "lfs"]
-;   clean = git-lfs clean -- %f
-;   smudge = git-lfs smudge -- %f
-;   process = git-lfs filter-process
-;   required = true
