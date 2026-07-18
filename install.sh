@@ -2,6 +2,10 @@
 
 set -euo pipefail
 
+put() {
+  echo ""; echo "$1"
+}
+
 # Mise (https://mise.jdx.dev/)
 if ! command -v mise &> /dev/null; then
   echo "Mise is not installed. Installing now.."
@@ -14,35 +18,6 @@ if [ ! -f "${ZDOTDIR:-$HOME}/.zim/init.zsh" ]; then
   curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh
 fi
 
-# --- Symlinks ---
-
-echo ""; echo "Symlink dotfiles:"
-DOTFILES="
-.profile
-.gitconfig
-.tmux.conf
-.psqlrc
-"
-for file in $DOTFILES; do
-  echo "Creating a symlink to $file in home"
-  ln -sfn "./dots/$file" ~/$(basename $file)
-done
-
-CONFIGS="
-ghostty
-karabiner
-nvim
-mise
-jj
-"
-for dir in $CONFIGS; do
-  echo "Creating a symlink at ~/.config/$dir"
-  ln -sfn ~/dots/config/$dir ~/.config/$dir
-done
-
-# Atuin keeps (re)creating a directory with the default config.
-ln -sf ~/dots/config/atuin/config.toml ~/.config/atuin/config.toml
-
 ZSHRC="$HOME/.zshrc"
 echo "Setting up $ZSHRC"
 if touch $ZSHRC && ! grep -Fxq "source ~/.profile" "$ZSHRC"; then
@@ -51,17 +26,22 @@ if touch $ZSHRC && ! grep -Fxq "source ~/.profile" "$ZSHRC"; then
   echo "source ~/.profile" >> "$ZSHRC"
 fi
 
-# --- Packages ---
+echo "Creating a symlink at ~/.config/mise"
+ln -sfn ~/dots/config/mise ~/.config/mise
 
-echo ""; echo "Install system packages (mise):"
-mise bootstrap
-echo ""; echo "Install project packages (mise):"
+put "Install system packages:"
+mise bootstrap packages apply -y
+
+put "Install config files:"
+mise bootstrap dotfiles apply -y --force
+
+put "Install project packages:"
 mise install; mise up
 
 # Note: requires `gh` to be installed from homebrew first
 FONTS_DIR="$HOME/fonts"
 if [ ! -d "$FONTS_DIR" ]; then
-  echo ""; echo "Install fonts:"
+  put "Install fonts:"
 
   echo "Logging into GitHub..."
   gh auth login
@@ -78,7 +58,7 @@ fi
 # Brave browser extensions
 if mise bootstrap packages status --json 2>/dev/null \
   | jq -e '.["brew-cask"].packages[] | select(.package == "brave-browser" and .state == "installed")' >/dev/null; then
-  echo ""; echo "Install Brave extensions:"
+  put "Install Brave extensions:"
 
   BRAVE_EXT_DIR="$HOME/Library/Application Support/BraveSoftware/Brave-Browser/External Extensions"
   mkdir -p "$BRAVE_EXT_DIR"
@@ -100,8 +80,8 @@ fi
 
 # Shell history sync
 if command -v atuin >/dev/null 2>&1; then
-  echo ""; echo "Syncing shell history (atuin):"
+  put "Syncing shell history (atuin):"
   atuin sync
 fi
 
-echo ""; echo "Finished."
+put "Finished."

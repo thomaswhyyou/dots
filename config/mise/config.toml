@@ -1,3 +1,6 @@
+[settings]
+dotfiles.root = "~/.dots"
+
 [bootstrap.packages]
 # Terminal
 "brew:git" = "latest"
@@ -26,6 +29,17 @@
 "brew-cask:rectangle" = "latest"
 "brew-cask:onlyoffice" = "latest"
 "brew-cask:itsycal" = "latest"
+
+[dotfiles]
+"~/.gitconfig" = "~/dots/.gitconfig"
+"~/.profile" = "~/dots/.profile"
+"~/.tmux.conf" = "~/dots/.tmux.conf"
+"~/.psqlrc" = "~/dots/.psqlrc"
+"~/.config/nvim" = "~/dots/config/nvim"
+"~/.config/ghostty" = "~/dots/config/ghostty"
+"~/.config/jj" = "~/dots/config/jj"
+"~/.config/karabiner" = "~/dots/config/karabiner"
+"~/.config/atuin" = "~/dots/config/atuin"
 
 [tools]
 claude-code = "latest"
