@@ -51,7 +51,7 @@ return {
             function()
               return vim.fn.fnamemodify(vim.fn.getcwd(), ":t") .. "/"
             end,
-            color = { fg = directory_fg, gui = "bold" },
+            color = { fg = directory_fg },
             padding = { left = 1, right = 0 },
             cond = function()
               -- Only when the file is inside the cwd; otherwise filename
@@ -72,7 +72,7 @@ return {
           {
             "lsp_status",
             icon = "",
-            color = { fg = directory_fg, gui = "bold" },
+            color = { fg = directory_fg },
           },
         },
         lualine_y = {
