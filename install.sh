@@ -2,57 +2,42 @@
 
 set -euo pipefail
 
-put() {
+section() {
   echo ""; echo "$1"
 }
 
-# --- Zsh + Zim
-
 # Zim (https://github.com/zimfw/zimfw)
 if [ ! -f "${ZDOTDIR:-$HOME}/.zim/init.zsh" ]; then
-  echo "Zim Framework not found. Running installer.."
+  section "Zim Framework not found. Running installer.."
   curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh
 fi
 
-ZSHRC="$HOME/.zshrc"
-echo "Setting up $ZSHRC"
-if touch $ZSHRC && ! grep -Fxq "source ~/.profile" "$ZSHRC"; then
-  echo "" >> "$ZSHRC"
-  echo "# Added by $(readlink -f "$0") on $(date +%F)." >> "$ZSHRC"
-  echo "source ~/.profile" >> "$ZSHRC"
-fi
-
-# --- Mise
-
 # Mise (https://mise.jdx.dev/)
 if ! command -v mise &> /dev/null; then
-  echo "Mise is not installed. Installing now.."
+  section "Mise is not installed. Installing now.."
   /bin/bash -c "$(curl https://mise.run | sh)"
 fi
 
-MISE_CONFIG="$HOME/.config/mise/config.toml"
-if [ ! -f "$MISE_CONFIG" ]; then
-  put "Fetching mise config.."
-  mkdir -p "$(dirname "$MISE_CONFIG")"
-  curl -fsSL https://raw.githubusercontent.com/thomaswhyyou/dots/main/config/mise/config.toml -o "$MISE_CONFIG"
+DOTS_DIR="$HOME/dots"
+if [ ! -d "$DOTS_DIR" ]; then
+  section "Cloning dotfiles repo.."
+  git clone https://github.com/thomaswhyyou/dots "$DOTS_DIR"
+  ln -sfn "$DOTS_DIR/config/mise" ~/.config/mise
 fi
 
-put "Install system packages:"
+section "Install system packages:"
 mise bootstrap packages apply -y
 
-put "Install config repos:"
-mise bootstrap repos apply -y
-
-put "Install config files:"
+section "Install config files:"
 mise bootstrap dotfiles apply -y --force
 
-put "Install project packages:"
+section "Install project packages:"
 mise install; mise up
 
-# Note: requires `gh` to be installed from homebrew first
+# Install fonts (note: requires `gh` to be installed first)
 FONTS_DIR="$HOME/fonts"
 if [ ! -d "$FONTS_DIR" ]; then
-  put "Install fonts:"
+  section "Install fonts:"
 
   echo "Logging into GitHub..."
   gh auth login
@@ -66,10 +51,10 @@ if [ ! -d "$FONTS_DIR" ]; then
   )
 fi
 
-# Brave browser extensions
+# Install Brave browser extensions
 if mise bootstrap packages status --json 2>/dev/null \
   | jq -e '.["brew-cask"].packages[] | select(.package == "brave-browser" and .state == "installed")' >/dev/null; then
-  put "Install Brave extensions:"
+  section "Install Brave extensions:"
 
   BRAVE_EXT_DIR="$HOME/Library/Application Support/BraveSoftware/Brave-Browser/External Extensions"
   mkdir -p "$BRAVE_EXT_DIR"
@@ -91,8 +76,8 @@ fi
 
 # Shell history sync
 if command -v atuin >/dev/null 2>&1; then
-  put "Syncing shell history (atuin):"
+  section "Syncing shell history (atuin):"
   atuin sync
 fi
 
-put "Finished."
+section "Finished."

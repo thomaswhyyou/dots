@@ -27,19 +27,17 @@
 "brew-cask:onlyoffice" = "latest"
 "brew-cask:itsycal" = "latest"
 
-[bootstrap.repos]
-"~/dots" = { url = "https://github.com/thomaswhyyou/dots.git" }
-
 [dotfiles]
-"~/.gitconfig" = "~/dots/.gitconfig"
-"~/.profile" = "~/dots/.profile"
-"~/.tmux.conf" = "~/dots/.tmux.conf"
-"~/.psqlrc" = "~/dots/.psqlrc"
 "~/.config/nvim" = "~/dots/config/nvim"
 "~/.config/ghostty" = "~/dots/config/ghostty"
 "~/.config/jj" = "~/dots/config/jj"
 "~/.config/karabiner" = "~/dots/config/karabiner"
 "~/.config/atuin" = "~/dots/config/atuin"
+"~/.gitconfig" = "~/dots/.gitconfig"
+"~/.tmux.conf" = "~/dots/.tmux.conf"
+"~/.psqlrc" = "~/dots/.psqlrc"
+"~/.profile" = "~/dots/.profile"
+"~/.zshrc/profile" = { block = "source ~/.profile" }
 
 [tools]
 claude-code = "latest"
