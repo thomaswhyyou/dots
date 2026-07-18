@@ -2,10 +2,10 @@
 
 set -euo pipefail
 
-# Homebrew (https://brew.sh/)
-if ! command -v brew &> /dev/null; then
-  echo "Homebrew is not installed. Installing now.."
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+# Mise (https://mise.jdx.dev/)
+if ! command -v mise &> /dev/null; then
+  echo "Mise is not installed. Installing now.."
+  /bin/bash -c "$(curl https://mise.run | sh)"
 fi
 
 # Zim (https://github.com/zimfw/zimfw)
@@ -18,7 +18,6 @@ fi
 
 echo ""; echo "Symlink dotfiles:"
 DOTFILES="
-.Brewfile
 .profile
 .gitconfig
 .tmux.conf
@@ -54,8 +53,8 @@ fi
 
 # --- Packages ---
 
-echo ""; echo "Install global packages (homebrew):"
-brew bundle --global
+echo ""; echo "Install system packages (mise):"
+mise bootstrap
 echo ""; echo "Install project packages (mise):"
 mise install; mise up
 
@@ -77,7 +76,8 @@ if [ ! -d "$FONTS_DIR" ]; then
 fi
 
 # Brave browser extensions
-if brew list --cask brave-browser &>/dev/null; then
+if mise bootstrap packages status --json 2>/dev/null \
+  | jq -e '.["brew-cask"].packages[] | select(.package == "brave-browser" and .state == "installed")' >/dev/null; then
   echo ""; echo "Install Brave extensions:"
 
   BRAVE_EXT_DIR="$HOME/Library/Application Support/BraveSoftware/Brave-Browser/External Extensions"

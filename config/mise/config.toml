@@ -1,12 +1,36 @@
-# [bootstrap.packages]
-# "brew:jj" = "latest"
-# # GUI apps
-# "brew-cask:spotify" = "latest"
-# "brew-cask:itsycal" = "latest"
+[bootstrap.packages]
+# Terminal
+"brew:git" = "latest"
+"brew:tmux" = "latest"
+"brew:neovim" = "latest"
+"brew:jj" = "latest"
+"brew:fzf" = "latest"
+"brew:ripgrep" = "latest"
+"brew:bat" = "latest"
+"brew:eza" = "latest"
+"brew:fd" = "latest"
+"brew:jq" = "latest"
+"brew:tree" = "latest"
+"brew:zoxide" = "latest"
+"brew:atuin" = "latest"
+"brew:lazygit" = "latest"
+"brew:gh" = "latest"
+# GUI apps
+"brew-cask:brave-browser" = "latest"
+"brew-cask:bitwarden" = "latest"
+"brew-cask:ghostty" = "latest"
+"brew-cask:spotify" = "latest"
+"brew-cask:iina" = "latest"
+"brew-cask:keepingyouawake" = "latest"
+"brew-cask:appcleaner" = "latest"
+"brew-cask:rectangle" = "latest"
+"brew-cask:onlyoffice" = "latest"
+"brew-cask:itsycal" = "latest"
 
 [tools]
 claude-code = "latest"
 codex = "latest"
+pi = "latest"
 tree-sitter = "latest"
 # rust
 rust-analyzer = "latest" # keep ahead of rust in PATH
