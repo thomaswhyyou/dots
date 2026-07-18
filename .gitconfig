@@ -34,7 +34,7 @@
 
 [alias]
   # Basic
-  cp = cherry-pick
+  ch = cherry-pick
   st = status -s
   co = checkout
   br = branch
