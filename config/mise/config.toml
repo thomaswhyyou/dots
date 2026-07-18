@@ -28,15 +28,17 @@
 "brew-cask:itsycal" = "latest"
 
 [dotfiles]
+"~/.profile" = "~/dots/.profile"
+"~/.gitconfig" = "~/dots/.gitconfig"
+"~/.tmux.conf" = "~/dots/.tmux.conf"
+"~/.psqlrc" = "~/dots/.psqlrc"
 "~/.config/nvim" = "~/dots/config/nvim"
 "~/.config/ghostty" = "~/dots/config/ghostty"
 "~/.config/jj" = "~/dots/config/jj"
 "~/.config/karabiner" = "~/dots/config/karabiner"
 "~/.config/atuin" = "~/dots/config/atuin"
-"~/.gitconfig" = "~/dots/.gitconfig"
-"~/.tmux.conf" = "~/dots/.tmux.conf"
-"~/.psqlrc" = "~/dots/.psqlrc"
-"~/.profile" = "~/dots/.profile"
+"~/.zshrc/homebrew" = { block = "eval \"$(/opt/homebrew/bin/brew shellenv zsh)\"" }
+"~/.zshrc/mise" = { block = "eval \"$(~/.local/bin/mise activate zsh)\"" }
 "~/.zshrc/profile" = { block = "source ~/.profile" }
 
 [tools]

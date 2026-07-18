@@ -16,6 +16,7 @@ fi
 if ! command -v mise &> /dev/null; then
   section "Mise is not installed. Installing now.."
   /bin/bash -c "$(curl https://mise.run | sh)"
+  eval "$(~/.local/bin/mise activate bash)"
 fi
 
 DOTS_DIR="$HOME/dots"

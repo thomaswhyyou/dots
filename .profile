@@ -12,11 +12,6 @@ alias ..4='cd ../../../../'                 # Go back 4 directory levels
 alias ..5='cd ../../../../../'              # Go back 5 directory levels
 alias ..6='cd ../../../../../../'           # Go back 6 directory levels
 
-# mise
-if [[ -f /opt/homebrew/bin/mise ]]; then
-  eval "$(mise activate zsh)"
-fi
-
 # neovim
 if command -v nvim >/dev/null 2>&1; then
   alias vim='nvim'
