@@ -19,6 +19,21 @@ return {
 
     local cli = require("sidekick.cli")
 
+    -- Herdr integration: when running inside a Herdr session, register the
+    -- Herdr session backend so `cli.send` can route to a Herdr pane running an
+    -- AI agent. No-op (and untouched behaviour) outside Herdr.
+    local in_herdr = vim.env.HERDR_ENV == "1"
+    local herdr = in_herdr and require("lib.sidekick_herdr").setup() or nil
+
+    -- Routing filter for context sends, recomputed per keypress (bind/agent
+    -- state changes at runtime):
+    --   * bound, or lone agent in Neovim's Herdr tab  -> exact pane, no picker
+    --   * other Herdr agents                          -> auto-pick if one, else prompt
+    --   * outside Herdr / none yet                    -> any installed tool (terminal)
+    local function target()
+      return (herdr and herdr.target_filter()) or { installed = true }
+    end
+
     vim.keymap.set("n", "<c-.>", function()
       cli.toggle({ filter = { installed = true } })
     end, { desc = "Sidekick Toggle" })
@@ -27,22 +42,28 @@ return {
       cli.toggle({ filter = { installed = true, focus = true } })
     end, { desc = "Sidekick Select" })
 
-    vim.keymap.set("n", "<leader>ac", function()
-      cli.toggle({ name = "claude", focus = true })
-    end, { desc = "Sidekick Toggle Claude" })
+    -- vim.keymap.set("n", "<leader>ac", function()
+    --   cli.toggle({ name = "claude", focus = true })
+    -- end, { desc = "Sidekick Toggle Claude" })
+
+    -- if in_herdr and herdr then
+    --   vim.keymap.set("n", "<leader>ab", function()
+    --     herdr.bind_pick()
+    --   end, { desc = "Herdr Bind Agent Pane" })
+    -- end
 
     --
 
     vim.keymap.set({ "n", "x" }, "<leader>at", function()
-      cli.send({ msg = "{this}", filter = { installed = true } })
+      cli.send({ msg = "{this}", filter = target() })
     end, { desc = "Send This" })
 
     vim.keymap.set("n", "<leader>af", function()
-      cli.send({ msg = "{file}", filter = { installed = true } })
+      cli.send({ msg = "{file}", filter = target() })
     end, { desc = "Send File" })
 
     vim.keymap.set("x", "<leader>av", function()
-      cli.send({ msg = "{selection}", filter = { installed = true } })
+      cli.send({ msg = "{selection}", filter = target() })
     end, { desc = "Send Visual Selection" })
 
     vim.keymap.set({ "n", "x" }, "<leader>ap", function()
