@@ -3,7 +3,7 @@ return {
   config = function()
     local fzf = require("fzf-lua")
     local height = 0.85
-    local width = vim.o.columns < 240 and 0.85 or 0.4
+    local width = math.max(math.floor(vim.o.columns * 0.4), 120)
 
     fzf.setup({
       -- Rebind multi-select from tab/shift-tab to ctrl-space
@@ -80,8 +80,10 @@ return {
     -- (grn stays default since rename is an input prompt, not a list).
     -- LSP pickers open with a visible preview
     local lsp_opts = {
-      winopts = { width = vim.o.columns < 240 and 0.85 or 0.65,
-      preview = { hidden = false } }
+      winopts = {
+        width = math.max(math.floor(vim.o.columns * 0.65), 140),
+        preview = { hidden = false },
+      },
     }
     vim.keymap.set("n", "gO", function() fzf.lsp_document_symbols(lsp_opts) end, { desc = "Fzf Document Symbols" })
     vim.keymap.set({ "n", "x" }, "gra", function() fzf.lsp_code_actions(lsp_opts) end, { desc = "Fzf Code Actions" })
