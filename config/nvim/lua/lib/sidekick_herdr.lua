@@ -45,18 +45,31 @@ local function exec(args)
   return vim.system(cmd, { text = true }):wait()
 end
 
+---Run a `herdr` command and return its decoded JSON `result` (nil on any
+---failure) alongside the raw `vim.system` completion.
+---@param args string[]
+---@return table|nil result
+---@return vim.SystemCompleted completed
+local function run(args)
+  local out = exec(args)
+  if out.code ~= 0 or not out.stdout or out.stdout == "" then
+    return nil, out
+  end
+  local ok, data = pcall(vim.json.decode, out.stdout)
+  if not ok or type(data) ~= "table" then
+    return nil, out
+  end
+  return data.result, out
+end
+
 ---Return the current `PaneInfo[]` from `herdr pane list`, or `{}` on error.
 ---@return table[]
 local function list_panes()
-  local out = exec({ "pane", "list" })
-  if out.code ~= 0 or not out.stdout or out.stdout == "" then
+  local result = run({ "pane", "list" })
+  if type(result) ~= "table" or type(result.panes) ~= "table" then
     return {}
   end
-  local ok, data = pcall(vim.json.decode, out.stdout)
-  if not ok or type(data) ~= "table" or type(data.result) ~= "table" then
-    return {}
-  end
-  return data.result.panes or {}
+  return result.panes
 end
 
 ---The Herdr pane Neovim itself runs in (never a send target / bind candidate).
@@ -201,6 +214,68 @@ end
 --------------------------------------------------------------------------------
 -- Public API (binding + registration)
 --------------------------------------------------------------------------------
+
+---Issue an arbitrary `herdr` CLI command.
+---Thin public wrapper over the internal runner: pass the args that follow the
+---`herdr` binary and get back the decoded JSON `result` (nil on any failure)
+---plus the raw completion for callers that need the exit code or stderr.
+---@param args string[]
+---@return table|nil result
+---@return vim.SystemCompleted completed
+function M.cli(args)
+  return run(args)
+end
+
+---Whether Neovim is explicitly bound to a Herdr pane.
+---@return boolean
+function M.is_bound()
+  return M._bound ~= nil
+end
+
+---Open a fresh Herdr pane running `tool`, bind Neovim to it, and return its
+---pane id. The tool's configured `cmd` (with its flags) is used as the launch
+---command, falling back to the bare tool name.
+---@param opts? { tool?: string, ratio?: number, direction?: "right"|"down", focus?: boolean }
+---@return string|nil pane_id
+function M.spawn_agent(opts)
+  opts = opts or {}
+  if vim.env.HERDR_ENV ~= "1" then
+    require("sidekick.util").warn("herdr: not running inside a Herdr session")
+    return
+  end
+  local me = self_pane_id()
+  if not me then
+    require("sidekick.util").warn("herdr: unknown self pane (HERDR_PANE_ID unset)")
+    return
+  end
+
+  local result = M.cli({
+    "pane",
+    "split",
+    "--pane",
+    me,
+    "--direction",
+    opts.direction or "right",
+    "--ratio",
+    tostring(opts.ratio or 0.75),
+    opts.focus == false and "--no-focus" or "--focus",
+  })
+  local pane_id = type(result) == "table" and type(result.pane) == "table" and result.pane.pane_id
+  if not pane_id then
+    require("sidekick.util").warn("herdr: failed to open agent pane")
+    return
+  end
+
+  -- Launch the tool in the new pane, preferring its configured cmd + flags.
+  local tool = opts.tool or M.opts.default_tool
+  local spec = require("sidekick.config").cli.tools[tool]
+  local cmd = spec and spec.cmd
+  local cmd_str = type(cmd) == "table" and table.concat(cmd, " ") or tool
+  M.cli({ "pane", "run", pane_id, cmd_str })
+
+  M.bind(pane_id, tool)
+  return pane_id
+end
 
 ---Whether at least one Herdr pane currently maps to a sidekick session.
 ---@return boolean

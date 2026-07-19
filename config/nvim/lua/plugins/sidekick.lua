@@ -34,9 +34,9 @@ return {
       return (herdr and herdr.target_filter()) or { installed = true }
     end
 
-    vim.keymap.set("n", "<c-.>", function()
-      cli.toggle({ filter = { installed = true } })
-    end, { desc = "Sidekick Toggle" })
+    -- vim.keymap.set("n", "<c-.>", function()
+    --   cli.toggle({ filter = { installed = true } })
+    -- end, { desc = "Sidekick Toggle" })
 
     vim.keymap.set("n", "<leader>aa", function()
       cli.toggle({ filter = { installed = true, focus = true } })
@@ -51,6 +51,24 @@ return {
     --     herdr.bind_pick()
     --   end, { desc = "Herdr Bind Agent Pane" })
     -- end
+
+    -- Open a new narrow Herdr pane to the right running Claude and bind to it.
+    -- Bound is a noop (the pane already exists) so repeat presses are harmless.
+    if in_herdr and herdr then
+      vim.keymap.set("n", "<leader>aoc", function()
+        if herdr.is_bound() then
+          vim.notify(
+            "Herdr: already bound to an agent pane",
+            vim.log.levels.INFO,
+            { title = "Sidekick" }
+          )
+          return
+        end
+        herdr.spawn_agent({ tool = "claude" })
+      end, { desc = "Herdr New Claude Pane" })
+
+      -- TODO: Add bind/unbind keymaps.
+    end
 
     --
 
