@@ -21,6 +21,7 @@ fi
 
 DOTS_DIR="$HOME/dots"
 if [ ! -d "$DOTS_DIR" ]; then
+  # Manually clone and symlink instead of using mise.
   section "Cloning dotfiles repo.."
   git clone https://github.com/thomaswhyyou/dots "$DOTS_DIR"
   ln -sfn "$DOTS_DIR/config/mise" ~/.config/mise
@@ -73,6 +74,13 @@ if mise bootstrap packages status --json 2>/dev/null \
       echo "Registered: ${ext_id}"
     fi
   done
+fi
+
+# Install herdr plugins
+if command -v herdr >/dev/null 2>&1 \
+  && herdr plugin list 2>/dev/null | grep -q "No plugins installed"; then
+  section "Install Herdr plugins:"
+  herdr plugin install lmilojevicc/herdr-splits.nvim
 fi
 
 # Sync shell history
