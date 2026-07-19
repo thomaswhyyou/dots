@@ -42,5 +42,5 @@ keybind = super+alt+left=text:\x13p
 
 # cmd+shfit+alt+left|right to move the current tmux window left/right
 # (requires the custom tmux bindings in .tmux.conf)
-keybind = super+shift+alt+right=text:\x13N
-keybind = super+shift+alt+left=text:\x13P
+keybind = super+shift+alt+right=text:\x13>
+keybind = super+shift+alt+left=text:\x13<
