@@ -13,7 +13,7 @@ macos-non-native-fullscreen = true
 mouse-hide-while-typing = true
 window-padding-balance = true
 
-# --- Tmux bindings
+# --- tmux/herdr bindings
 # Reference: https://github.com/mxgrn/dotfiles/tree/master/.config/ghostty
 
 # cmd+t to create a new tmux window
