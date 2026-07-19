@@ -1,6 +1,7 @@
 -- Note: Also supports navigation between Neovim and tmux split panes.
 return {
   "https://github.com/mrjones2014/smart-splits.nvim",
+  cond = vim.env.HERDR_ENV ~= "1",
   config = function()
     local ss = require("smart-splits")
     ss.setup({

@@ -34,14 +34,17 @@
 "~/.psqlrc" = "~/dots/.psqlrc"
 "~/.config/nvim" = "~/dots/config/nvim"
 "~/.config/ghostty" = "~/dots/config/ghostty"
-"~/.config/jj" = "~/dots/config/jj"
+"~/.config/jj/config.toml" = "~/dots/config/jj/config.toml"
 "~/.config/karabiner" = "~/dots/config/karabiner"
-"~/.config/atuin" = "~/dots/config/atuin"
+"~/.config/atuin/config.toml" = "~/dots/config/atuin/config.toml"
+"~/.config/herdr/config.toml" = "~/dots/config/herdr/config.toml"
+# Set in .zshrc
 "~/.zshrc/homebrew" = { block = "eval \"$(/opt/homebrew/bin/brew shellenv zsh)\"" }
 "~/.zshrc/mise" = { block = "eval \"$(~/.local/bin/mise activate zsh)\"" }
 "~/.zshrc/profile" = { block = "source ~/.profile" }
 
 [tools]
+herdr = "latest"
 claude-code = "latest"
 codex = "latest"
 pi = "latest"
