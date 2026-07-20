@@ -24,7 +24,62 @@ description = "open narrow right pane"
 
 # TODO: Add a command to set a layout .
 
-# https://github.com/lmilojevicc/herdr-splits.nvim
+# --- Switch workspaces
+[[keys.command]]
+key = "prefix+!"
+type = "shell"
+command = "herdr workspace focus 1"
+description = "switch to workspace 1"
+
+[[keys.command]]
+key = "prefix+@"
+type = "shell"
+command = "herdr workspace focus 2"
+description = "switch to workspace 2"
+
+[[keys.command]]
+key = "prefix+#"
+type = "shell"
+command = "herdr workspace focus 3"
+description = "switch to workspace 3"
+
+[[keys.command]]
+key = "prefix+$"
+type = "shell"
+command = "herdr workspace focus 4"
+description = "switch to workspace 4"
+
+[[keys.command]]
+key = "prefix+%"
+type = "shell"
+command = "herdr workspace focus 5"
+description = "switch to workspace 5"
+
+[[keys.command]]
+key = "prefix+^"
+type = "shell"
+command = "herdr workspace focus 6"
+description = "switch to workspace 6"
+
+[[keys.command]]
+key = "prefix+&"
+type = "shell"
+command = "herdr workspace focus 7"
+description = "switch to workspace 7"
+
+[[keys.command]]
+key = "prefix+*"
+type = "shell"
+command = "herdr workspace focus 8"
+description = "switch to workspace 8"
+
+[[keys.command]]
+key = "prefix+("
+type = "shell"
+command = "herdr workspace focus 9"
+description = "switch to workspace 9"
+
+# --- https://github.com/lmilojevicc/herdr-splits.nvim
 [[keys.command]]
 key = "ctrl+h"
 type = "plugin_action"
