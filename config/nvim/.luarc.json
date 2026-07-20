@@ -9,6 +9,7 @@
   ],
   "workspace.checkThirdParty": false,
   "workspace.library": [
-    "$VIMRUNTIME"
+    "$VIMRUNTIME",
+    "~/.local/share/nvim/lazy/sidekick.nvim"
   ]
 }

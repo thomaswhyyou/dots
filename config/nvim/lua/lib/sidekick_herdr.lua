@@ -94,9 +94,16 @@ end
 -- Session backend interface (called by sidekick core)
 --------------------------------------------------------------------------------
 
+--- A Herdr session descriptor: a sidekick `State` plus the Herdr pane
+--- coordinates we attach so routing / `send` can target the exact pane.
+---@class sidekick.herdr.State: sidekick.cli.session.State
+---@field herdr_pane_id string
+---@field herdr_tab_id? string
+---@field priority? integer
+
 ---Build sidekick sessions from a `herdr pane list` snapshot.
 ---@param panes table[]
----@return sidekick.cli.session.State[]
+---@return sidekick.herdr.State[]
 local function build_sessions(panes)
   local Config = require("sidekick.config")
   local me = self_pane_id()
@@ -107,7 +114,7 @@ local function build_sessions(panes)
     by_id[p.pane_id] = p
   end
 
-  local ret = {} ---@type sidekick.cli.session.State[]
+  local ret = {} ---@type sidekick.herdr.State[]
   local seen = {} ---@type table<string, boolean>
 
   ---@param pane_id string
@@ -123,7 +130,7 @@ local function build_sessions(panes)
     seen[pane_id] = true
     ret[#ret + 1] = {
       id = "herdr:" .. pane_id,
-      cwd = p and (p.foreground_cwd or p.cwd) or nil,
+      cwd = (p and (p.foreground_cwd or p.cwd)) or "",
       herdr_pane_id = pane_id,
       herdr_tab_id = p and p.tab_id or nil,
       tool = tool,
@@ -163,7 +170,7 @@ local function self_tab_id(panes)
   end
 end
 
----@return sidekick.cli.session.State[]
+---@return sidekick.herdr.State[]
 function M.sessions()
   if vim.env.HERDR_ENV ~= "1" then
     return {}
@@ -313,7 +320,7 @@ function M.target_filter()
   -- exactly one agent sharing Neovim's Herdr tab -> auto-target it
   local tab = self_tab_id(panes)
   if tab then
-    local same = {} ---@type sidekick.cli.session.State[]
+    local same = {} ---@type sidekick.herdr.State[]
     for _, s in ipairs(sessions) do
       if s.herdr_tab_id == tab then
         same[#same + 1] = s
