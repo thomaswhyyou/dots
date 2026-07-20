@@ -19,38 +19,15 @@ return {
 
     local cli = require("sidekick.cli")
 
+    vim.keymap.set("n", "<leader>aa", function()
+      cli.toggle({ filter = { installed = true, focus = true } })
+    end, { desc = "Sidekick Select" })
+
     -- Herdr integration: when running inside a Herdr session, register the
     -- Herdr session backend so `cli.send` can route to a Herdr pane running an
     -- AI agent. No-op (and untouched behaviour) outside Herdr.
     local in_herdr = vim.env.HERDR_ENV == "1"
     local herdr = in_herdr and require("lib.sidekick_herdr").setup() or nil
-
-    -- Routing filter for context sends, recomputed per keypress (bind/agent
-    -- state changes at runtime):
-    --   * bound, or lone agent in Neovim's Herdr tab  -> exact pane, no picker
-    --   * other Herdr agents                          -> auto-pick if one, else prompt
-    --   * outside Herdr / none yet                    -> any installed tool (terminal)
-    local function target()
-      return (herdr and herdr.target_filter()) or { installed = true }
-    end
-
-    -- vim.keymap.set("n", "<c-.>", function()
-    --   cli.toggle({ filter = { installed = true } })
-    -- end, { desc = "Sidekick Toggle" })
-
-    vim.keymap.set("n", "<leader>aa", function()
-      cli.toggle({ filter = { installed = true, focus = true } })
-    end, { desc = "Sidekick Select" })
-
-    -- vim.keymap.set("n", "<leader>ac", function()
-    --   cli.toggle({ name = "claude", focus = true })
-    -- end, { desc = "Sidekick Toggle Claude" })
-
-    -- if in_herdr and herdr then
-    --   vim.keymap.set("n", "<leader>ab", function()
-    --     herdr.bind_pick()
-    --   end, { desc = "Herdr Bind Agent Pane" })
-    -- end
 
     -- Open a new narrow Herdr pane to the right running Claude and bind to it.
     -- Bound is a noop (the pane already exists) so repeat presses are harmless.
@@ -67,10 +44,23 @@ return {
         herdr.spawn_agent({ tool = "claude" })
       end, { desc = "Herdr New Claude Pane" })
 
-      -- TODO: Add bind/unbind keymaps.
+      vim.keymap.set("n", "<leader>ab", function()
+        herdr.bind_pick()
+      end, { desc = "Herdr Bind Agent Pane" })
+
+      vim.keymap.set("n", "<leader>au", function()
+        herdr.unbind()
+      end, { desc = "Herdr Unbind Agent Pane" })
     end
 
-    --
+    -- Routing filter for context sends, recomputed per keypress (bind/agent
+    -- state changes at runtime):
+    --   * bound, or lone agent in Neovim's Herdr tab  -> exact pane, no picker
+    --   * other Herdr agents                          -> auto-pick if one, else prompt
+    --   * outside Herdr / none yet                    -> any installed tool (terminal)
+    local function target()
+      return (herdr and herdr.target_filter()) or { installed = true }
+    end
 
     vim.keymap.set({ "n", "x" }, "<leader>at", function()
       cli.send({ msg = "{this}", filter = target() })
