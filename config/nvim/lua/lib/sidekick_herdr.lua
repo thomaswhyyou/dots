@@ -347,7 +347,8 @@ function M.unbind()
   require("sidekick.util").info("herdr: unbound")
 end
 
----Pick a Herdr pane to bind via `vim.ui.select` (excludes Neovim's own pane).
+---Pick a Herdr pane to bind via `vim.ui.select`. Only panes with a detected
+---agent are offered (Neovim's own pane is always excluded).
 function M.bind_pick()
   if vim.env.HERDR_ENV ~= "1" then
     require("sidekick.util").warn("herdr: not running inside a Herdr session")
@@ -356,20 +357,29 @@ function M.bind_pick()
   local me = self_pane_id()
   local candidates = {} ---@type table[]
   for _, p in ipairs(list_panes()) do
-    if p.pane_id ~= me then
+    if p.pane_id ~= me and type(p.agent) == "string" and p.agent ~= "" then
       candidates[#candidates + 1] = p
     end
   end
   if #candidates == 0 then
-    require("sidekick.util").warn("herdr: no other panes to bind to")
+    require("sidekick.util").warn("herdr: no agent panes to bind to")
     return
   end
   vim.ui.select(candidates, {
     prompt = "Bind Herdr agent pane:",
+    -- One row: `<pane_id>  <cwd>  <agent (status)>  [title]`. Candidates always
+    -- have an agent, so the title is its task description, not a shell prompt.
     format_item = function(p)
-      local where = p.foreground_cwd or p.cwd or "?"
-      local what = p.agent or p.terminal_title_stripped or p.terminal_title or ""
-      return ("%s  %s  %s"):format(p.pane_id, vim.fn.fnamemodify(where, ":~"), what)
+      local cwd = vim.fn.fnamemodify(p.foreground_cwd or p.cwd or "?", ":~")
+      local st = p.agent_status
+      local agent = (st and st ~= "" and st ~= "unknown") and ("%s (%s)"):format(p.agent, st)
+        or p.agent
+      local row = ("%s  %s  %s"):format(p.pane_id, cwd, agent)
+      local title = p.terminal_title_stripped or p.terminal_title
+      if type(title) == "string" and title ~= "" then
+        row = row .. "  " .. title
+      end
+      return row
     end,
   }, function(p)
     if p then
@@ -387,8 +397,16 @@ function M.setup(opts)
     M._registered = true
   end
   pcall(function()
-    vim.api.nvim_create_user_command("HerdrBind", M.bind_pick, { desc = "Herdr: bind agent pane" })
-    vim.api.nvim_create_user_command("HerdrUnbind", M.unbind, { desc = "Herdr: unbind agent pane" })
+    vim.api.nvim_create_user_command(
+      "HerdrBindSidekick",
+      M.bind_pick,
+      { desc = "Herdr: bind agent pane" }
+    )
+    vim.api.nvim_create_user_command(
+      "HerdrUnbindSidekick",
+      M.unbind,
+      { desc = "Herdr: unbind agent pane" }
+    )
   end)
   return M
 end

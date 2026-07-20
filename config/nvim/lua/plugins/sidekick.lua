@@ -19,10 +19,6 @@ return {
 
     local cli = require("sidekick.cli")
 
-    vim.keymap.set("n", "<leader>aa", function()
-      cli.toggle({ filter = { installed = true, focus = true } })
-    end, { desc = "Sidekick Select" })
-
     -- Herdr integration: when running inside a Herdr session, register the
     -- Herdr session backend so `cli.send` can route to a Herdr pane running an
     -- AI agent. No-op (and untouched behaviour) outside Herdr.
@@ -51,6 +47,10 @@ return {
       vim.keymap.set("n", "<leader>au", function()
         herdr.unbind()
       end, { desc = "Herdr Unbind Agent Pane" })
+    else
+      vim.keymap.set("n", "<leader>aa", function()
+        cli.toggle({ filter = { installed = true, focus = true } })
+      end, { desc = "Sidekick Select" })
     end
 
     -- Routing filter for context sends, recomputed per keypress (bind/agent
