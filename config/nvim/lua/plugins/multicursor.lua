@@ -37,13 +37,6 @@ return {
           end
         end)
       end)
-
-      -- -- -- Customize how cursors look.
-      -- local hl = vim.api.nvim_set_hl
-      -- -- hl(0, "MultiCursorCursor", { link = "Search" })
-      -- -- hl(0, "MultiCursorVisual", { link = "Search" })
-      -- hl(0, "MultiCursorSign", { link = "Search", reverse = true })
-      -- -- hl(0, "MultiCursorMatchPreview", { link = "Search" })
     end,
   },
 }
