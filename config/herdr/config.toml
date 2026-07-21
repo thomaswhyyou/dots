@@ -22,8 +22,6 @@ type = "shell"
 command = "herdr pane split --pane \"$HERDR_ACTIVE_PANE_ID\" --direction right --ratio 0.75 --focus"
 description = "open narrow right pane"
 
-# TODO: Add a command to set a layout .
-
 # --- Switch workspaces
 [[keys.command]]
 key = "prefix+!"
