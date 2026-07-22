@@ -108,6 +108,8 @@ vim.keymap.set("n", "gD", function()
   })
   vim.lsp.buf.definition()
 end, { desc = "Go to definition (tagstack S-Tab/Tab)" })
+-- Disable macro recording, almost always an accidental press
+vim.keymap.set("n", "q", "<Nop>", { noremap = true, silent = true })
 
 --- AUTOCMDS ---
 
