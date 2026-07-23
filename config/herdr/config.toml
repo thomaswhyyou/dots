@@ -1,11 +1,5 @@
 onboarding = false
 
-[keys]
-prefix = "ctrl+s"
-split_horizontal = "prefix+minus"
-split_vertical = "prefix+|"
-last_pane = "prefix+l"
-
 [theme]
 name = "rose-pine"
 auto_switch = false
@@ -22,60 +16,14 @@ type = "shell"
 command = "herdr pane split --pane \"$HERDR_ACTIVE_PANE_ID\" --direction right --ratio 0.75 --focus"
 description = "open narrow right pane"
 
-# --- Switch workspaces
-[[keys.command]]
-key = "prefix+!"
-type = "shell"
-command = "herdr workspace focus 1"
-description = "switch to workspace 1"
-
-[[keys.command]]
-key = "prefix+@"
-type = "shell"
-command = "herdr workspace focus 2"
-description = "switch to workspace 2"
-
-[[keys.command]]
-key = "prefix+#"
-type = "shell"
-command = "herdr workspace focus 3"
-description = "switch to workspace 3"
-
-[[keys.command]]
-key = "prefix+$"
-type = "shell"
-command = "herdr workspace focus 4"
-description = "switch to workspace 4"
-
-[[keys.command]]
-key = "prefix+%"
-type = "shell"
-command = "herdr workspace focus 5"
-description = "switch to workspace 5"
-
-[[keys.command]]
-key = "prefix+^"
-type = "shell"
-command = "herdr workspace focus 6"
-description = "switch to workspace 6"
-
-[[keys.command]]
-key = "prefix+&"
-type = "shell"
-command = "herdr workspace focus 7"
-description = "switch to workspace 7"
-
-[[keys.command]]
-key = "prefix+*"
-type = "shell"
-command = "herdr workspace focus 8"
-description = "switch to workspace 8"
-
-[[keys.command]]
-key = "prefix+("
-type = "shell"
-command = "herdr workspace focus 9"
-description = "switch to workspace 9"
+[keys]
+prefix = "ctrl+s"
+split_horizontal = "prefix+minus"
+split_vertical = "prefix+|"
+last_pane = "prefix+l"
+switch_tab = "prefix+1..9"
+switch_workspace = "prefix+shift+1..9"
+focus_agent = "prefix+alt+1..9"
 
 # --- https://github.com/lmilojevicc/herdr-splits.nvim
 [[keys.command]]
