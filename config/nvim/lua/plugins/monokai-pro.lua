@@ -9,6 +9,11 @@ return {
   opts = {
     -- classic | octagon | pro | machine | ristretto | spectrum
     filter = "pro",
+    day_night = {
+      enable = true,
+      day_filter = "pro",
+      night_filter = "spectrum",
+    },
     background_clear = {
       "which-key",
       "snacks",
