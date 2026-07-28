@@ -20,7 +20,6 @@ return {
           end
           return default_enable(buf, win, info)
         end,
-        -- sources = { require("dropbar.sources").path },
       },
     })
 
