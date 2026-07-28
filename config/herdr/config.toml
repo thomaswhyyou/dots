@@ -11,10 +11,16 @@ delivery = "herdr"
 show_agent_labels_on_pane_borders = true
 
 [[keys.command]]
+key = "prefix+shift+o"
+type = "shell"
+command = "~/.config/herdr/bin/split-pct.sh 0.25 left"
+description = "open left pane at 25% of screen width"
+
+[[keys.command]]
 key = "prefix+o"
 type = "shell"
-command = "herdr pane split --pane \"$HERDR_ACTIVE_PANE_ID\" --direction right --ratio 0.75 --focus"
-description = "open narrow right pane"
+command = "~/.config/herdr/bin/split-pct.sh 0.25 right"
+description = "open right pane at 25% of screen width"
 
 [keys]
 prefix = "ctrl+s"

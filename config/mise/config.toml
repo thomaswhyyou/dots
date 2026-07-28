@@ -38,6 +38,7 @@
 "~/.config/karabiner" = "~/dots/config/karabiner"
 "~/.config/atuin/config.toml" = "~/dots/config/atuin/config.toml"
 "~/.config/herdr/config.toml" = "~/dots/config/herdr/config.toml"
+"~/.config/herdr/bin" = "~/dots/config/herdr/bin"
 # Set in .zshrc
 "~/.zshrc/homebrew" = { block = "eval \"$(/opt/homebrew/bin/brew shellenv zsh)\"" }
 "~/.zshrc/mise" = { block = "eval \"$(~/.local/bin/mise activate zsh)\"" }
