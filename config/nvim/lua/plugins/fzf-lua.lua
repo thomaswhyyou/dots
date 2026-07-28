@@ -65,9 +65,10 @@ return {
       },
       grep = {
         winopts = {
-          fullscreen = true,
           preview = {
             hidden = false,
+            layout = "vertical",
+            vertical = "down:50%",
           },
         },
       },
