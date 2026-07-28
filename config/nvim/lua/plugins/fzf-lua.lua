@@ -65,6 +65,8 @@ return {
       },
       grep = {
         winopts = {
+          height = height,
+          width = math.max(math.floor(vim.o.columns * 0.65), 140),
           preview = {
             hidden = false,
             layout = "vertical",
