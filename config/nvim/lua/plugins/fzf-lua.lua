@@ -3,7 +3,7 @@ return {
   config = function()
     local fzf = require("fzf-lua")
     local height = 0.85
-    local width = math.max(math.floor(vim.o.columns * 0.4), 120)
+    local width = 160
 
     fzf.setup({
       -- Rebind multi-select from tab/shift-tab to ctrl-space
@@ -66,7 +66,7 @@ return {
       grep = {
         winopts = {
           height = height,
-          width = math.max(math.floor(vim.o.columns * 0.65), 140),
+          width = 200,
           preview = {
             hidden = false,
             layout = "vertical",
@@ -84,7 +84,8 @@ return {
     -- LSP pickers open with a visible preview
     local lsp_opts = {
       winopts = {
-        width = math.max(math.floor(vim.o.columns * 0.65), 140),
+        height = height,
+        width = 200,
         preview = { hidden = false },
       },
     }
