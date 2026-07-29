@@ -1,5 +1,6 @@
 return {
   "https://github.com/Bekaboo/dropbar.nvim",
+  enabled = false,
   config = function()
     -- Capture before setup() to avoid infinite recursion, setup() merges
     -- overrides into this same table.

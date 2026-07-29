@@ -12,7 +12,6 @@ return {
 
     require("lualine").setup({
       options = {
-        always_show_tabline = false,
         component_separators = "", -- No separators between components within a section.
         section_separators = { -- Diagonal slant between sections
           left = vim.fn.nr2char(0xE0B8), -- nf-ple-lower_left_triangle (\)
@@ -82,13 +81,81 @@ return {
         lualine_z = { "searchcount" },
       },
       tabline = {
+        lualine_a = {
+          {
+            "buffers",
+            section_separators = { left = "", right = "" },
+            separator = { left = "", right = "" },
+
+            show_filename_only = true, -- Shows shortened relative path when set to false.
+            hide_filename_extension = false, -- Hide filename extension when set to true.
+            show_modified_status = true, -- Shows indicator when the buffer is modified.
+
+            mode = 2, -- 0: Shows buffer name
+            -- 1: Shows buffer index
+            -- 2: Shows buffer name + buffer index
+            -- 3: Shows buffer number
+            -- 4: Shows buffer name + buffer number
+
+            max_length = vim.o.columns * 2 / 3, -- Maximum width of buffers component,
+            -- it can also be a function that returns
+            -- the value of `max_length` dynamically.
+            filetype_names = {
+              -- TelescopePrompt = "Telescope",
+              -- dashboard = "Dashboard",
+              oil = "Oil",
+              fzf = "FZF",
+              -- alpha = "Alpha",
+            }, -- Shows specific buffer name for that filetype ( { `filetype` = `buffer_name`, ... } )
+
+            -- buffers_color = {
+            --   -- Same values as the general color option can be used here.
+            --   active = "lualine_{section}_normal", -- Color for active buffer.
+            --   inactive = "lualine_{section}_inactive", -- Color for inactive buffer.
+            -- },
+            symbols = {
+              modified = " ●", -- Text to show when the buffer is modified
+              alternate_file = "#", -- Text to show to identify the alternate file
+              directory = "", -- Text to show when the buffer is a directory
+            },
+          },
+        },
+        lualine_b = {},
+        lualine_c = {},
+        lualine_x = {},
+        lualine_y = {},
         lualine_z = {
           {
             "tabs",
+            -- Only show the tab list once a second tab exists
+            cond = function()
+              return #vim.api.nvim_list_tabpages() > 1
+            end,
             section_separators = { left = "", right = "" },
           },
         },
       },
     })
+
+    -- Jump straight to a buffer by its tabline index with <A-N>.
+    -- The bang makes out-of-range indices a no-op instead of an error.
+    for i = 1, 9 do
+      vim.keymap.set("n", "<A-" .. i .. ">", function()
+        -- Same index -> bufnr map the LualineBuffersJump command reads.
+        local bufnr = require("lualine.components.buffers").bufpos2nr[i]
+        if not bufnr then
+          return
+        end
+        -- Already on screen? Move to that window rather than replacing the
+        -- buffer in the current one.
+        for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+          if vim.api.nvim_win_get_buf(win) == bufnr then
+            vim.api.nvim_set_current_win(win)
+            return
+          end
+        end
+        vim.cmd("LualineBuffersJump! " .. i)
+      end, { desc = "Go to buffer " .. i })
+    end
   end,
 }
