@@ -9,9 +9,18 @@ return {
       -- Rebind multi-select from tab/shift-tab to ctrl-space
       keymap = {
         fzf = {
+          true, -- inherit the default fzf keymaps
           ["ctrl-space"] = "toggle", -- toggle selection without moving
           ["tab"] = "down", -- tab now just moves down
           ["shift-tab"] = "up", -- shift-tab now just moves up
+        },
+      },
+      actions = {
+        files = {
+          true, -- inherit the default file actions
+          -- fzf has no ctrl-enter key, so this is bound to alt-enter and
+          -- <C-CR> is translated to it in on_create below.
+          ["alt-enter"] = fzf.actions.file_vsplit,
         },
       },
       winopts = {
@@ -28,6 +37,8 @@ return {
           for _, key in ipairs({ "<C-h>", "<C-j>", "<C-k>", "<C-l>", "<C-\\>" }) do
             vim.keymap.set("t", key, key, { buffer = true, nowait = true })
           end
+          -- fzf can't bind ctrl-enter, so send it as alt-enter (ESC + CR)
+          vim.keymap.set("t", "<C-CR>", "<Esc><CR>", { buffer = true, nowait = true })
         end,
       },
       fzf_colors = true, -- Needs this so theme colors can be respected
