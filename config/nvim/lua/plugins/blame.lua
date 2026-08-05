@@ -11,7 +11,7 @@ return {
         stack_push = "<TAB>",
         stack_pop = "<BS>",
         show_commit = "<CR>",
-        close = { "<esc>", "q" },
+        close = { "q" },
         copy_hash = "y",
         open_in_browser = "o",
       },
