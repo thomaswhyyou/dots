@@ -88,26 +88,32 @@ vim.lsp.document_color.enable(false)
 -- for i = 1, 9 do
 --   vim.keymap.set("n", "<A-" .. i .. ">", i .. "gt", { desc = "Go to tab " .. i })
 -- end
--- LSP go-to-definition with tagstack-based back/forward navigation.
--- https://www.reddit.com/r/neovim/comments/y9czdl/navigate_back_to_function_from_where_we_did_goto/
-vim.keymap.set("n", "gD", function()
-  -- Bind tagstack navigation in a buffer: <S-Tab> pops back, <Tab> re-follows.
-  local function set_tag_nav_maps(buf)
-    vim.keymap.set("n", "<S-Tab>", "<C-T>", { silent = true, buffer = buf })
-    vim.keymap.set("n", "<Tab>", "<CMD>tag<CR>", { buffer = buf })
-  end
-  -- Bind in the origin buffer (so the maps still work after popping back here)
-  set_tag_nav_maps(vim.api.nvim_get_current_buf())
-  -- And in the destination buffer (once the definition jump lands there)
-  vim.api.nvim_create_autocmd("BufEnter", {
-    group = vim.api.nvim_create_augroup("go-to-definition-jumplist", { clear = true }),
-    once = true,
-    callback = function(args)
-      set_tag_nav_maps(args.buf)
-    end,
-  })
-  vim.lsp.buf.definition()
-end, { desc = "Go to definition (tagstack S-Tab/Tab)" })
+-- -- LSP go-to-definition with tagstack-based back/forward navigation.
+-- -- https://www.reddit.com/r/neovim/comments/y9czdl/navigate_back_to_function_from_where_we_did_goto/
+-- vim.keymap.set("n", "gD", function()
+--   -- Bind tagstack navigation in a buffer: <S-Tab> pops back, <Tab> re-follows.
+--   local function set_tag_nav_maps(buf)
+--     vim.keymap.set("n", "<S-Tab>", "<C-T>", { silent = true, buffer = buf })
+--     vim.keymap.set("n", "<Tab>", "<CMD>tag<CR>", { buffer = buf })
+--   end
+--   -- Bind in the origin buffer (so the maps still work after popping back here)
+--   set_tag_nav_maps(vim.api.nvim_get_current_buf())
+--   -- And in the destination buffer (once the definition jump lands there)
+--   vim.api.nvim_create_autocmd("BufEnter", {
+--     group = vim.api.nvim_create_augroup("go-to-definition-jumplist", { clear = true }),
+--     once = true,
+--     callback = function(args)
+--       set_tag_nav_maps(args.buf)
+--     end,
+--   })
+--   vim.lsp.buf.definition()
+-- end, { desc = "Go to definition (tagstack S-Tab/Tab)" })
+-- Browser-style back/forward through visited files, tracked per window.
+-- Lua port of https://github.com/ckarnell/history-traverse
+local history_traverse = require("lib.history_traverse")
+history_traverse.setup()
+vim.keymap.set("n", "<S-Tab>", history_traverse.back, { desc = "History: previous file" })
+vim.keymap.set("n", "<Tab>", history_traverse.forward, { desc = "History: next file" })
 -- Disable macro recording, almost always an accidental press
 vim.keymap.set("n", "q", "<Nop>", { noremap = true, silent = true })
 
